@@ -1,0 +1,7 @@
+exports.animalBreeds = require('./animalBreeds')
+exports.animalCoats = require('./animalCoats')
+exports.vets = require('./vets')
+exports.reasonsForVisit = require('./reasonsForVisit')
+exports.callOrigins = require('./callOrigins')
+exports.officerInitials = require('./officerInitials')
+exports.citationNumbers = require('./citationNumbers')

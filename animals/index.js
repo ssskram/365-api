@@ -1,0 +1,1 @@
+exports.allOrders = require('./allAnimals')

@@ -1,0 +1,1 @@
+exports.allItems = require('./allIncidents')
