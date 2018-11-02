@@ -1,5 +1,5 @@
 {
-  "name": "acc-api",
+  "name": "365-api",
   "version": "0.0.1",
   "dependencies": {
     "dotenv": "^2.0.0",
