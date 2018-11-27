@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const checkToken = require('../token')
+const refreshToken = require('../refresh')
 
 // return users
 router.get('/allUsers',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
+            console.log(await refreshToken())
             res.status(200).send('Got it!')
         } else res.status(403).end()
     }
