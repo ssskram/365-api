@@ -27,7 +27,7 @@ and return all incidents
 */
 
 // return all incidents
-app.get('/allIncidents',
+app.get('accMobile/allIncidents',
   function (req, res) {
     const valid = (checkToken(req.token))
     if (valid == true) {
