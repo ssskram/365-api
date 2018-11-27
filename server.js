@@ -24,10 +24,8 @@ app.use(require('morgan')('combined'))
 
 // routes
 app.use("/accmobile", require('./routes/accMobile'))
-app.use("/iphelp", require('./routes/ipHelp'))
-app.use("/pghworks", require('./routes/pghWorks'))
 
-// Production error handler
+// production error handler
 if (app.get('env') === 'production') {
   app.use(function (err, req, res, next) {
     console.error(err.stack)
