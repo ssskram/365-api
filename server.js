@@ -1,149 +1,39 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const bearerToken = require('express-bearer-token')
-const incidents = require('./incidents')
-const animals = require('./animals')
-const dropdowns = require('./dropdowns')
-const users = require('./users')
+const cors = require('cors')
 
+// import env variables
 require('dotenv').config()
 
+// start express
 var app = express()
 app.set('port', process.env.PORT || 3000)
+
+// bearer token
+app.use(bearerToken())
+
+// body parser
+app.use(bodyParser.json())
+
+// enable cors on all requests
+app.use(cors())
 
 // logging
 app.use(require('morgan')('combined'))
 
-// bearer token
-app.use(bearerToken())
-const checkToken = (token) => {
-  if (token == process.env.BEARER) return true
-  else return false
+// routes
+app.use("/accmobile", require('./routes/accMobile'))
+app.use("/iphelp", require('./routes/ipHelp'))
+app.use("/pghworks", require('./routes/pghWorks'))
+
+// Production error handler
+if (app.get('env') === 'production') {
+  app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.sendStatus(err.status || 500)
+  })
 }
-
-/*
-Incidents!
-These endpoints call up Sharepoint
-and return all incidents
-*/
-
-// return all incidents
-app.get('accMobile/allIncidents',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-        incidents.allIncidents.allIncidents()
-        res.status(200).send('Got it!')
-    } else res.status(403).end()
-  }
-)
-
-/*
-Animals!
-These endpoints call up Sharepoint
-and return all animals
-*/
-
-// return all animals
-app.get('/allAnimals',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-/*
-Dropdowns!
-These endpoints call up Sharepoint
-and return all data to populate <select> elements throughout site
-*/
-
-// return animal breeds
-app.get('/animalBreeds',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// return animal coats
-app.get('/animalCoats',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// return veterinarians
-app.get('/vets',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// returns reasons for visit
-app.get('/reasonsForVisit',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// returns call origins
-app.get('/callOrigins',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// returns initials of all officers
-app.get('/officerInitials',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-// returns citation numbers
-app.get('/citationNumbers',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
-
-/*
-Users!
-These endpoints call up Sharepoint
-and return user group for ACC Mobile
-*/
-
-// returns user group
-app.get('/userGroup',
-  function (req, res) {
-    const valid = (checkToken(req.token))
-    if (valid == true) {
-
-    } else res.status(403).end()
-  }
-)
 
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
