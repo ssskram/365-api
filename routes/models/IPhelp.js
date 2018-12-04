@@ -1,11 +1,11 @@
 
-const allUsers = {
+const allLiaisons = {
     list: 'value',
     item: {
-        user: "Email"
+        user: "Title"
     }
 }
 
 module.exports = {
-    allUsers
+    allLiaisons
 }

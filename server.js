@@ -24,6 +24,7 @@ app.use(require('morgan')('combined'))
 
 // routes
 app.use("/accmobile", require('./routes/accMobile'))
+app.use("/iphelp", require('./routes/IPhelp'))
 
 // production error handler
 if (app.get('env') === 'production') {
