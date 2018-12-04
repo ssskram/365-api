@@ -28,4 +28,24 @@ router.get('/allLiaisons',
     }
 )
 
+// return all equipment loans
+router.get('/allEquipmentLoans',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/EquipmentLoan/_api/web/lists/GetByTitle('Reservations')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.allEquipmentLoans).transform())
+                })
+        } else res.status(403).end()
+    }
+)
+
 module.exports = router
