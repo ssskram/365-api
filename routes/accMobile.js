@@ -4,7 +4,7 @@ const checkToken = require('../token')
 const refreshToken = require('../refresh')
 const fetch = require('node-fetch')
 const dt = require('node-json-transform').DataTransform
-const models = require('./models/accMobile')
+const models = require('../models/accMobile')
 
 global.Headers = fetch.Headers
 
@@ -24,6 +24,7 @@ router.get('/allUsers',
                 .then(data => {
                     res.status(200).send(dt(data, models.allUsers).transform())
                 })
+                .catch(err => console.log(err))
         } else res.status(403).end()
     }
 )

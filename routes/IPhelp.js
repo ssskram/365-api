@@ -4,7 +4,7 @@ const checkToken = require('../token')
 const refreshToken = require('../refresh')
 const fetch = require('node-fetch')
 const dt = require('node-json-transform').DataTransform
-const models = require('./models/IPhelp')
+const models = require('../models/IPhelp')
 
 global.Headers = fetch.Headers
 
@@ -24,6 +24,7 @@ router.get('/allLiaisons',
                 .then(data => {
                     res.status(200).send(dt(data, models.allLiaisons).transform())
                 })
+                .catch(err => console.log(err))
         } else res.status(403).end()
     }
 )
@@ -44,6 +45,28 @@ router.get('/allEquipmentLoans',
                 .then(data => {
                     res.status(200).send(dt(data, models.allEquipmentLoans).transform())
                 })
+                .catch(err => console.log(err))
+        } else res.status(403).end()
+    }
+)
+
+// return all equipment
+router.get('/allEquipment',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/EquipmentLoan/_api/web/lists/GetByTitle('Equipment')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.allEquipment).transform())
+                })
+                .catch(err => console.log(err))
         } else res.status(403).end()
     }
 )

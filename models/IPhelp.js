@@ -28,6 +28,21 @@ const allEquipmentLoans = {
   }]
 }
 
+
+const allEquipment = {
+  list: 'value',
+  item: {
+    item: 'Item',
+    itemType: 'ItemType',
+    location: 'Location',
+    pcNumber: 'PCNumber',
+    assetNumber: 'AssetNumber',
+    itemID: 'Id'
+  }
+}
+
 module.exports = {
   allLiaisons,
-allEquipmentLoans}
+  allEquipmentLoans,
+  allEquipment
+}
