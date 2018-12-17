@@ -14,7 +14,7 @@ router.get('/courseHistory',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/Law/EthicsTrainingAdmin/_api/web/lists/GetByTitle('Course progress')/items?$filter=Email eq '" + req.query.user + "'", {
-                    method: 'get',
+                    method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
                         'Accept': 'application/json'
@@ -34,13 +34,20 @@ router.post('/newCourse',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            fetch("https://cityofpittsburgh.sharepoint.com/sites/Law/EthicsTrainingAdmin/_api/web/lists/GetByTitle('Course progress')/items", {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/Law/EthicsTrainingAdmin/_api/web/lists/GetByTitle('Course progress')/items", {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
                     }),
-                    body: "{'__metadata': { 'type': 'SP.Data.Course_x0020_progressListItem' }}, " + req.body
+                    body: JSON.stringify(req.body)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send({
+                        id: data.Id
+                    })
                 })
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
@@ -53,13 +60,16 @@ router.post('/updateCourse',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/Law/EthicsTrainingAdmin/_api/web/lists/GetByTitle('Course progress')/items(" + req.query.id + ")", {
-                    method: 'PUT',
+                    method: 'MERGE',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        "IF-MATCH": "*"
                     }),
-                    body: "{'__metadata': { 'type': 'SP.Data.Course_x0020_progressListItem' }}, " + req.body
+                    body: JSON.stringify(req.body)
                 })
+                .then(res.status(200).send())
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
     }
@@ -76,8 +86,9 @@ router.post('/giftDisclosure',
                         'Authorization': 'Bearer ' + await refreshToken(),
                         'Accept': 'application/json'
                     }),
-                    body: "{'__metadata': { 'type': 'SP.Data.Gift_x0020_disclosuresListItem' }}, " + req.body
+                    body: JSON.stringify(req.body)
                 })
+                .then(res.status(200).send())
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
     }

@@ -13,7 +13,6 @@ const course = {
         organization: 'Organization',
         completed: 'Completed',
         progress: 'Progress',
-        module: 'Module',
         highPoint: 'HighPoint'
     },
     operate: [{
