@@ -71,4 +71,25 @@ router.get('/allEquipment',
     }
 )
 
+// create a new loan record
+router.post('/newEquipmentLoan',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/InPHelp/_api/web/lists/GetByTitle('Equipment')/items", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }),
+                    body: JSON.stringify(req.body)
+                })
+                .then(res => res.json())
+                .then(res.status(200).send())
+                .catch(error => res.status(500).send(error))
+        } else res.status(403).end()
+    }
+)
+
 module.exports = router
