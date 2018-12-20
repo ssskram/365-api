@@ -76,7 +76,7 @@ router.post('/newEquipmentLoan',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            await fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/InPHelp/_api/web/lists/GetByTitle('Equipment')/items", {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/EquipmentLoan/_api/web/lists/GetByTitle('Reservations')/items", {
                     method: 'POST',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
