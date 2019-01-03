@@ -21,9 +21,13 @@ router.get('/isAdmin',
                 .then(res => res.json())
                 .then(data => {
                     if (data["value"].find(admin => admin.Email == req.query.user)) {
-                        res.status(200).send(true)
+                        res.status(200).send({
+                            isAdmin: true
+                        })
                     } else {
-                        res.status(200).send(false)
+                        res.status(200).send({
+                            isAdmin: false
+                        })
                     }
                 })
                 .catch(err => res.status(500).send(err))
