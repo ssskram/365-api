@@ -86,7 +86,9 @@ router.post('/newEquipmentLoan',
                     body: JSON.stringify(req.body)
                 })
                 .then(res => res.json())
-                .then(res.status(200).send())
+                .then(data => {
+                    res.status(200).send()
+                })
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
     }
