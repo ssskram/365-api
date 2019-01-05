@@ -27,6 +27,7 @@ app.use("/accmobile", require('./routes/accMobile'))
 app.use("/iphelp", require('./routes/IPhelp'))
 app.use("/ethicstraining", require('./routes/ethicsTraining'))
 app.use("/pghsupply", require('./routes/pghSupply'))
+app.use("/gbgb", require('./routes/gbgb'))
 
 // production error handler
 if (app.get('env') === 'production') {
