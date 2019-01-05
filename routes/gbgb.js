@@ -35,16 +35,15 @@ router.post('/musing',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/Analytics/gbgb/_api/web/lists/GetByTitle('musings')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
-                .then(res.status(200))
-                .catch(res.status(500))
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
+            res.status(200)
         } else res.status(403).end()
     }
 )
