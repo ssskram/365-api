@@ -13,7 +13,7 @@ router.get('/musings',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/Analytics/gbgb/_api/web/lists/GetByTitle('musings')/items", {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/Analytics/gbgb/_api/web/lists/GetByTitle('musings')/items?$top=5000", {
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
