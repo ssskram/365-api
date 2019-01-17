@@ -13,9 +13,14 @@
     "multer": "^1.4.1",
     "node-fetch": "^2.2.1",
     "node-json-transform": "^1.0.17",
-    "passport": "^0.2.2"
+    "passport": "^0.2.2",
+    "shelljs": "^0.8.3"
   },
   "engines": {
     "node": "8.11.1"
+  },
+  "scripts": {
+    "staging": "node deploy/staging.js",
+    "production": "node deploy/production.js"
   }
 }
