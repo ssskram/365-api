@@ -8,6 +8,6 @@ Bearer token.  Just ask for it
 
 ## Docs
 
-Swagger UI is at base url
+Swagger UI:
 
-https://365proxy.azurewebsites.us
+https://365proxy.azurewebsites.us/docs
