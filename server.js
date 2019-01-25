@@ -10,6 +10,11 @@ require('dotenv').config()
 var app = express()
 app.set('port', process.env.PORT || 3000)
 
+// docs
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
+app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
 // bearer token
 app.use(bearerToken())
 
