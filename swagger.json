@@ -799,6 +799,12 @@
                 "summary": "Updates an existing incident record",
                 "description": "Passed a new incident record in body, replaces existing record",
                 "parameters": [{
+                        "name": "itemId",
+                        "in": "body",
+                        "description": "SP item ID",
+                        "type": "number",
+                        "required": true
+                    }, {
                         "name": "OwnersFirstName",
                         "in": "body",
                         "description": "Owner's first name",
@@ -911,6 +917,296 @@
                         "required": false
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/addAnimal": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Creates a new animal record",
+                "description": "Passed a new animal record in body",
+                "parameters": [{
+                        "name": "Type",
+                        "in": "body",
+                        "description": "Animal type",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Breed",
+                        "in": "body",
+                        "description": "Animal breed",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Coat",
+                        "in": "body",
+                        "description": "Animal coat",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Sex",
+                        "in": "body",
+                        "description": "Animal sex",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "LicenseNumber",
+                        "in": "body",
+                        "description": "License number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "RabbiesVacNo",
+                        "in": "body",
+                        "description": "Rabbies vacination number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "RabbiesVacExp",
+                        "in": "body",
+                        "description": "Rabbies vaccination expiration date",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Veterinarian",
+                        "in": "body",
+                        "description": "Veterinarian",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "LicenseYear",
+                        "in": "body",
+                        "description": "Year license was issued",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Age",
+                        "in": "body",
+                        "description": "Animal age",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "AdvisoryID",
+                        "in": "body",
+                        "description": "UUID of parent incident, primary key between two",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Name",
+                        "in": "body",
+                        "description": "Animal name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Comments",
+                        "in": "body",
+                        "description": "Free text",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/updateAnimal": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Update an existing animal record",
+                "description": "Passed a new animal record in body, replaces existing record",
+                "parameters": [{
+                        "name": "itemId",
+                        "in": "body",
+                        "description": "SP item ID",
+                        "type": "number",
+                        "required": true
+                    }, {
+                        "name": "Type",
+                        "in": "body",
+                        "description": "Animal type",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Breed",
+                        "in": "body",
+                        "description": "Animal breed",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Coat",
+                        "in": "body",
+                        "description": "Animal coat",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Sex",
+                        "in": "body",
+                        "description": "Animal sex",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "LicenseNumber",
+                        "in": "body",
+                        "description": "License number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "RabbiesVacNo",
+                        "in": "body",
+                        "description": "Rabbies vacination number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "RabbiesVacExp",
+                        "in": "body",
+                        "description": "Rabbies vaccination expiration date",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Veterinarian",
+                        "in": "body",
+                        "description": "Veterinarian",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "LicenseYear",
+                        "in": "body",
+                        "description": "Year license was issued",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Age",
+                        "in": "body",
+                        "description": "Animal age",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "AdvisoryID",
+                        "in": "body",
+                        "description": "UUID of parent incident, primary key between two",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Name",
+                        "in": "body",
+                        "description": "Animal name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Comments",
+                        "in": "body",
+                        "description": "Free text",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/deleteAnimal": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Deletes existing animal record",
+                "description": "Passed SP item ID in query",
+                "parameters": [{
+                    "name": "itemId",
+                    "in": "query",
+                    "description": "SP item ID",
+                    "type": "number",
+                    "required": true
+                }],
                 "responses": {
                     "200": {
                         "description": "Success!"
