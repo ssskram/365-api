@@ -44,6 +44,17 @@
                     },
                     "403": {
                         "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }

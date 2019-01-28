@@ -24,20 +24,55 @@ router.get('/allUsers',
                 .then(data => {
                     res.status(200).send(dt(data, models.allUsers).transform())
                 })
-                .catch(err => console.log(err))
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
 
 // return all incidents
+let allIncidents = []
 router.get('/allIncidents',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            try {
+                await electronicIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$top=5000")
+                await analogIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('GeocodedAdvises')/items?$top=5000")
+                const merged = allIncidents[0].concat(allIncidents[1])
+                res.status(200).send(merged)
+            } catch (err) {
+                res.status(500).send(err)
+            }
         } else res.status(403).end()
     }
 )
+const electronicIncidents = async (url) => {
+    await fetch(url, {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + await refreshToken(),
+                'Accept': 'application/json'
+            })
+        })
+        .then(res => res.json())
+        .then(data => dt(data, models.electronicIncidents).transform())
+        .then(transformed => allIncidents.push(transformed))
+        .catch(err => console.log(err))
+}
+const analogIncidents = async (url) => {
+    await fetch(url, {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + await refreshToken(),
+                'Accept': 'application/json'
+            })
+        })
+        .then(res => res.json())
+        .then(data => dt(data, models.analogIncidents).transform())
+        .then(transformed => allIncidents.push(transformed))
+        .catch(err => console.log(err))
+}
+
 
 // return all animals
 router.get('/allAnimals',
