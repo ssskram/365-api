@@ -57,8 +57,66 @@ const analogIncidents = {
     }
 }
 
+const animalBreeds = {
+    list: 'value',
+    item: {
+        breed: 'breed',
+        type: 'AnimalType'
+    }
+}
+
+const animalCoats = {
+    list: 'value',
+    item: {
+        coat: 'Coat',
+        type: 'AnimalType'
+    }
+}
+
+const vets = {
+    list: 'value',
+    item: {
+        vet: Vet
+    }
+}
+
+const reasonsForVisit = {
+    list: 'value',
+    item: {
+        reason: 'Reason'
+    }
+}
+
+const callOrigins = {
+    list: 'value',
+    item: {
+        origin: 'Origin'
+    }
+}
+
+const citationNumbers = {
+    list: 'value',
+    item: {
+        citation: 'Number'
+    }
+}
+
+const officerInitials = {
+    list: 'value',
+    item: {
+        initial: 'Initials'
+    }
+}
+
 module.exports = {
     allUsers,
     electronicIncidents,
-    analogIncidents
+    analogIncidents,
+    animalBreeds,
+    animalCoats,
+    vets,
+    reasonsForVisit,
+    callOrigins,
+    citationNumbers,
+    officerInitials
 }

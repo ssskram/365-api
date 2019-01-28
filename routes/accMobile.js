@@ -85,21 +85,43 @@ router.get('/allAnimals',
 )
 
 // return all animal breeds
-router.get('/allBreeds',
+router.get('/animalBreeds',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalBreeds')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.animalBreeds).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
 
 // return all animal coats
-router.get('/allCoats',
+router.get('/animalCoats',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalCoats')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.animalCoats).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
@@ -109,7 +131,18 @@ router.get('/vets',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Veterinarians')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.vets).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
@@ -119,7 +152,18 @@ router.get('/reasonsForVisit',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('reasonsForVisit')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.reasonsForVisit).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
@@ -129,7 +173,18 @@ router.get('/callOrigins',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Call origins!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('callOrigins')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.callOrigins).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
@@ -139,7 +194,18 @@ router.get('/citationNumbers',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('citationNumbers')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.citationNumbers).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
@@ -149,7 +215,18 @@ router.get('/officerInitials',
     function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('officerInitials')/items", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.officerInitials).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
