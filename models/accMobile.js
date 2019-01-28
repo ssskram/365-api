@@ -45,7 +45,6 @@ const electronicIncidents = {
         }
     ]
 }
-
 const analogIncidents = {
     list: 'value',
     item: {
@@ -54,6 +53,26 @@ const analogIncidents = {
         address: 'Address',
         itemId: 'Id',
         note: 'Note'
+    }
+}
+
+const animals = {
+    list: 'value',
+    item: {
+        itemID: 'Id',
+        incidentID: 'AdvisoryID',
+        animalName: 'Name',
+        animalType: 'Type',
+        animalBreed: 'Breed',
+        animalCoat : 'Coat',
+        animalSex: 'Sex',
+        animalAge: 'Age',
+        LicenseNo: 'LicenseNumber',
+        LicenseYear: 'LicenseYear',
+        RabbiesVacNo: 'RabbiesVacNo',
+        RabbiesVacExp: 'RabbiesVacExp',
+        Vet: 'Veterinarian',
+        Comments: 'Comments'
     }
 }
 
@@ -76,7 +95,7 @@ const animalCoats = {
 const vets = {
     list: 'value',
     item: {
-        vet: Vet
+        vet: 'Vet'
     }
 }
 
@@ -112,6 +131,7 @@ module.exports = {
     allUsers,
     electronicIncidents,
     analogIncidents,
+    animals,
     animalBreeds,
     animalCoats,
     vets,

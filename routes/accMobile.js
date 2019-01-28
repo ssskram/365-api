@@ -74,19 +74,30 @@ const analogIncidents = async (url) => {
 }
 
 
-// return all animals
-router.get('/allAnimals',
-    function (req, res) {
+// return animals per advisory ID
+router.get('/selectAnimals',
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            res.status(200).send('Got it!')
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Animals')/items?$filter=AdvisoryID eq '" + req.query.AdvisoryID + "'", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.animals).transform())
+                })
+                .catch(err => res.status(500).send(err))
         } else res.status(403).end()
     }
 )
 
 // return all animal breeds
 router.get('/animalBreeds',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalBreeds')/items", {
@@ -107,7 +118,7 @@ router.get('/animalBreeds',
 
 // return all animal coats
 router.get('/animalCoats',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalCoats')/items", {
@@ -128,7 +139,7 @@ router.get('/animalCoats',
 
 // return all veterinarians
 router.get('/vets',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Veterinarians')/items", {
@@ -149,7 +160,7 @@ router.get('/vets',
 
 // return all reasons for visit
 router.get('/reasonsForVisit',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('reasonsForVisit')/items", {
@@ -170,7 +181,7 @@ router.get('/reasonsForVisit',
 
 // return all call origins
 router.get('/callOrigins',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('callOrigins')/items", {
@@ -191,7 +202,7 @@ router.get('/callOrigins',
 
 // return citation numbers
 router.get('/citationNumbers',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('citationNumbers')/items", {
@@ -212,7 +223,7 @@ router.get('/citationNumbers',
 
 // return officer's initials
 router.get('/officerInitials',
-    function (req, res) {
+    async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('officerInitials')/items", {
