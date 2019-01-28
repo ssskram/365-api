@@ -25,7 +25,7 @@
                 "security": [{
                     "Bearer": []
                 }],
-                "summary": "ACC Mobile Users",
+                "summary": "All Users",
                 "description": "Returns an array of all users",
                 "parameters": [],
                 "responses": {
@@ -67,7 +67,7 @@
                 "security": [{
                     "Bearer": []
                 }],
-                "summary": "ACC Mobile Incidents",
+                "summary": "All Incidents",
                 "description": "Returns an array of all incidents",
                 "parameters": [],
                 "responses": {
@@ -137,6 +137,783 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/selectIncident": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Single incident",
+                "description": "Returns an array with a single incident object",
+                "parameters": [{
+                    "name": "AdvisoryID",
+                    "in": "query",
+                    "description": "UUID of incident",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "An array of with a single incident object",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "uuid": {
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "itemId": {
+                                        "type": "number"
+                                    },
+                                    "coords": {
+                                        "type": "string"
+                                    },
+                                    "reasonForVisit": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "ownersLastName": {
+                                        "type": "string"
+                                    },
+                                    "ownersFirstName": {
+                                        "type": "string"
+                                    },
+                                    "ownersTelephoneNumber": {
+                                        "type": "string"
+                                    },
+                                    "pghCode": {
+                                        "type": "string"
+                                    },
+                                    "citationNumber": {
+                                        "type": "string"
+                                    },
+                                    "comments": {
+                                        "type": "string"
+                                    },
+                                    "callOrigin": {
+                                        "type": "string"
+                                    },
+                                    "submittedBy": {
+                                        "type": "string"
+                                    },
+                                    "modifiedBy": {
+                                        "type": "string"
+                                    },
+                                    "officerInitials": {
+                                        "type": "string"
+                                    },
+                                    "open": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/selectAnimals": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Animals per incident",
+                "description": "Returns an array with all animals associated with incident",
+                "parameters": [{
+                    "name": "AdvisoryID",
+                    "in": "query",
+                    "description": "UUID of incident",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "An array of animals records",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "itemID": {
+                                        "type": "number"
+                                    },
+                                    "incidentID": {
+                                        "type": "string"
+                                    },
+                                    "animalName": {
+                                        "type": "string"
+                                    },
+                                    "animalType": {
+                                        "type": "string"
+                                    },
+                                    "animalBreed": {
+                                        "type": "string"
+                                    },
+                                    "animalCoat": {
+                                        "type": "string"
+                                    },
+                                    "animalSex": {
+                                        "type": "string"
+                                    },
+                                    "animalAge": {
+                                        "type": "string"
+                                    },
+                                    "LicenseNo": {
+                                        "type": "string"
+                                    },
+                                    "LicenseYear": {
+                                        "type": "string"
+                                    },
+                                    "RabbiesVacNo": {
+                                        "type": "string"
+                                    },
+                                    "RabbiesVacExp": {
+                                        "type": "string"
+                                    },
+                                    "Vet": {
+                                        "type": "string"
+                                    },
+                                    "Comments": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/animalBreeds": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All animal breeds",
+                "description": "Array of animal breeds",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of animal breeds",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "breed": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/animalCoats": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All animal coats",
+                "description": "Array of animal coats",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of animal coats",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "coat": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/vets": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All veterinarians",
+                "description": "Array of vets",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of vets",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "vet": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/reasonsForVisit": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All reasons for visit",
+                "description": "Array of reasons for visit",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of reasons for visit",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "reason": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/callOrigins": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All call origins",
+                "description": "Array of call origins",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of call origins",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "origin": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/citationNumbers": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All citation numbers",
+                "description": "Array of citation numbers",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of citation numbers",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "citation": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/officerInitials": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "All officer initials",
+                "description": "Array of officer initials",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Array of officer initials",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "initial": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/addIncident": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Creates a new incident record",
+                "description": "Passed a new incident record in body, formatted for SP",
+                "parameters": [{
+                        "name": "OwnersFirstName",
+                        "in": "body",
+                        "description": "Owner's first name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "OwnersLastName",
+                        "in": "body",
+                        "description": "Owner's last name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "OwnersTelephone",
+                        "in": "body",
+                        "description": "Owner's telephone number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "ReasonforVisit",
+                        "in": "body",
+                        "description": "Reason for visit",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "ADVPGHCode",
+                        "in": "body",
+                        "description": "Incident code (what law did they break?)",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "CitationNumber",
+                        "in": "body",
+                        "description": "Citation number, if issued",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Comments",
+                        "in": "body",
+                        "description": "Free text",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "AddressID",
+                        "in": "body",
+                        "description": "GPS coords, formatted as object",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "AdvisoryID",
+                        "in": "body",
+                        "description": "Unique identifier for incident",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "SubmittedBy",
+                        "in": "body",
+                        "description": "User's email address",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "CallOrigin",
+                        "in": "body",
+                        "description": "Incident's point of origin",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Address",
+                        "in": "body",
+                        "description": "Address as formatted string",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "in": "body",
+                        "description": "User's email address",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Officers",
+                        "in": "body",
+                        "description": "String array of officer initials involved in incident",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Open",
+                        "in": "body",
+                        "description": "Incident status, Yes or No",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Note",
+                        "in": "body",
+                        "description": "Smaller free text field",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/updateIncident": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Updates an existing incident record",
+                "description": "Passed a new incident record in body, replaces existing record",
+                "parameters": [{
+                        "name": "OwnersFirstName",
+                        "in": "body",
+                        "description": "Owner's first name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "OwnersLastName",
+                        "in": "body",
+                        "description": "Owner's last name",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "OwnersTelephone",
+                        "in": "body",
+                        "description": "Owner's telephone number",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "ReasonforVisit",
+                        "in": "body",
+                        "description": "Reason for visit",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "ADVPGHCode",
+                        "in": "body",
+                        "description": "Incident code (what law did they break?)",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "CitationNumber",
+                        "in": "body",
+                        "description": "Citation number, if issued",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Comments",
+                        "in": "body",
+                        "description": "Free text",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "AddressID",
+                        "in": "body",
+                        "description": "GPS coords, formatted as object",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "AdvisoryID",
+                        "in": "body",
+                        "description": "Unique identifier for incident",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "SubmittedBy",
+                        "in": "body",
+                        "description": "User's email address",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "CallOrigin",
+                        "in": "body",
+                        "description": "Incident's point of origin",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Address",
+                        "in": "body",
+                        "description": "Address as formatted string",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "in": "body",
+                        "description": "User's email address",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Officers",
+                        "in": "body",
+                        "description": "String array of officer initials involved in incident",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "Open",
+                        "in": "body",
+                        "description": "Incident status, Yes or No",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "Note",
+                        "in": "body",
+                        "description": "Smaller free text field",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
                     },
                     "403": {
                         "description": "Access Denied"
