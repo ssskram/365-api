@@ -95,6 +95,27 @@ router.get('/selectAnimals',
     }
 )
 
+// return incident per advisory ID
+router.get('/selectIncident',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$filter=AdvisoryID eq '" + req.query.AdvisoryID + "'", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.electronicIncidents).transform())
+                })
+                .catch(err => res.status(500).send(err))
+        } else res.status(403).end()
+    }
+)
+
 // return all animal breeds
 router.get('/animalBreeds',
     async function (req, res) {
