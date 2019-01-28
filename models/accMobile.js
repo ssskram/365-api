@@ -50,7 +50,7 @@ const analogIncidents = {
     item: {
         link: 'link',
         date: 'Date',
-        address: 'Address',
+        address: 'address',
         itemId: 'Id',
         note: 'Note'
     }
