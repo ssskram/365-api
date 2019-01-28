@@ -59,6 +59,102 @@
                 }
             }
         },
+        "/accmobile/allIncidents": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "ACC Mobile Incidents",
+                "description": "Returns an array of all incidents",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "An array of incident accounts",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "uuid": {
+                                        "type": "string"
+                                    },
+                                    "link": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "itemId": {
+                                        "type": "number"
+                                    },
+                                    "coords": {
+                                        "type": "string"
+                                    },
+                                    "reasonForVisit": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "ownersLastName": {
+                                        "type": "string"
+                                    },
+                                    "ownersFirstName": {
+                                        "type": "string"
+                                    },
+                                    "ownersTelephoneNumber": {
+                                        "type": "string"
+                                    },
+                                    "pghCode": {
+                                        "type": "string"
+                                    },
+                                    "citationNumber": {
+                                        "type": "string"
+                                    },
+                                    "comments": {
+                                        "type": "string"
+                                    },
+                                    "callOrigin": {
+                                        "type": "string"
+                                    },
+                                    "submittedBy": {
+                                        "type": "string"
+                                    },
+                                    "modifiedBy": {
+                                        "type": "string"
+                                    },
+                                    "officerInitials": {
+                                        "type": "string"
+                                    },
+                                    "open": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/ethicstraining/courseHistory": {
             "get": {
                 "tags": [
