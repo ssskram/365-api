@@ -21,7 +21,7 @@ const electronicIncidents = {
         address: 'Address',
         itemId: 'Id',
         coords: 'AddressID',
-        reasonForVisit: 'ReasonForVisit',
+        reasonForVisit: 'ReasonforVisit',
         note: 'Note',
         ownersLastName: 'OwnersLastName',
         ownersFirstName: 'OwnersFirstName',
