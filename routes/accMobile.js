@@ -94,7 +94,28 @@ router.get('/selectIncident',
     }
 )
 
-// create a new loan record
+// images per incident
+router.get('/attachments',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items(" + req.query.itemId + ")/AttachmentFiles/", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.attachments).transform())
+                })
+                .catch(err => res.status(500).send(err))
+        } else res.status(403).end()
+    }
+)
+
+// create a new incident record
 router.post('/addIncident',
     async function (req, res) {
         const valid = (checkToken(req.token))

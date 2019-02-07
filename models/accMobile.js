@@ -56,6 +56,13 @@ const analogIncidents = {
     }
 }
 
+const attachments = {
+    list: 'value',
+    item: {
+        relativeUrl: 'ServerRelativeUrl'
+    }
+}
+
 const animals = {
     list: 'value',
     item: {
@@ -138,5 +145,6 @@ module.exports = {
     reasonsForVisit,
     callOrigins,
     citationNumbers,
-    officerInitials
+    officerInitials,
+    attachments
 }
