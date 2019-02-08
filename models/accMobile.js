@@ -61,8 +61,8 @@ const attachments = {
     item: {
         incidentID: 'incidentID',
         relativePath: 'relativePath',
-        attachmentTitle: 'attachmentTitle',
-        attachmentDescription: 'attachmentDescription'
+        attachmentTitle: 'imageTitle',
+        attachmentDescription: 'imageDescription'
     }
 }
 
