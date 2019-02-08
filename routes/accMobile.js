@@ -112,7 +112,7 @@ router.get('/attachments',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items?$filter=IncidentID eq '" + req.query.incidentID + "'", {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items?$filter=incidentID eq '" + req.query.incidentID + "'", {
                     method: 'get',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),

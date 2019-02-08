@@ -59,6 +59,7 @@ const analogIncidents = {
 const attachments = {
     list: 'value',
     item: {
+        incidentID: 'incidentID',
         relativePath: 'relativePath',
         attachmentTitle: 'attachmentTitle',
         attachmentDescription: 'attachmentDescription'
