@@ -17,7 +17,9 @@ router.get('/courseHistory',
                     method: 'GET',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
+                        'Accept': 'application/json;odata=verbose',
+                        'Content-Type': 'application/json;odata=verbose',
+                        "X-RequestDigest": "form digest value"
                     })
                 })
                 .then(res => res.json())

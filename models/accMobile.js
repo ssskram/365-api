@@ -59,7 +59,9 @@ const analogIncidents = {
 const attachments = {
     list: 'value',
     item: {
-        relativeUrl: 'ServerRelativeUrl'
+        relativePath: 'relativePath',
+        attachmentTitle: 'attachmentTitle',
+        attachmentDescription: 'attachmentDescription'
     }
 }
 
