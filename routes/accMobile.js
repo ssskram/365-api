@@ -29,19 +29,14 @@ router.get('/allUsers',
 )
 
 // return all incidents
-// TODO: get rid of this array
-let allIncidents = []
 router.get('/allIncidents',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            allIncidents = []
             try {
-                await electronicIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$top=5000")
-                await analogIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('GeocodedAdvises')/items?$top=5000")
-                // instead of relying on external array (which persists across calls), 
-                // return data from functions and merge here
-                const merged = allIncidents[0].concat(allIncidents[1])
+                const ei = await electronicIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$top=5000")
+                const ai = await analogIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('GeocodedAdvises')/items?$top=5000")
+                const merged = ei.concat(ai)
                 res.status(200).send(merged)
             } catch (err) {
                 res.status(500).send(err)
@@ -50,7 +45,7 @@ router.get('/allIncidents',
     }
 )
 const electronicIncidents = async (url) => {
-    await fetch(url, {
+    const ei = await fetch(url, {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + await refreshToken(),
@@ -59,11 +54,11 @@ const electronicIncidents = async (url) => {
         })
         .then(res => res.json())
         .then(data => dt(data, models.electronicIncidents).transform())
-        .then(transformed => allIncidents.push(transformed))
         .catch(err => console.log(err))
+    return ei
 }
 const analogIncidents = async (url) => {
-    await fetch(url, {
+    const ai = await fetch(url, {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + await refreshToken(),
@@ -72,8 +67,8 @@ const analogIncidents = async (url) => {
         })
         .then(res => res.json())
         .then(data => dt(data, models.analogIncidents).transform())
-        .then(transformed => allIncidents.push(transformed))
         .catch(err => console.log(err))
+    return ai
 }
 
 // return incident per advisory ID
