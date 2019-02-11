@@ -181,6 +181,50 @@ router.post('/updateIncident',
     }
 )
 
+// comments
+router.get('/comments',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items?$filter=incidentID eq '" + req.query.incidentID + "'", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.comments).transform())
+                })
+                .catch(err => res.status(500).send(err))
+        } else res.status(403).end()
+    }
+)
+router.post('/post',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }),
+                    body: JSON.stringify(req.body)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send()
+                })
+                .catch(error => res.status(500).send(error))
+        } else res.status(403).end()
+    }
+)
+
+
+
 // return animals per advisory ID
 router.get('/selectAnimals',
     async function (req, res) {

@@ -137,6 +137,15 @@ const officerInitials = {
     }
 }
 
+const comments = {
+    list: 'value',
+    item: {
+        incidentID: 'incidentID',
+        user: 'user',
+        comment: 'comment'
+    }
+}
+
 module.exports = {
     allUsers,
     electronicIncidents,
@@ -149,5 +158,6 @@ module.exports = {
     callOrigins,
     citationNumbers,
     officerInitials,
-    attachments
+    attachments,
+    comments
 }
