@@ -5,20 +5,6 @@ const refreshToken = require('../refresh')
 const fetch = require('node-fetch')
 const dt = require('node-json-transform').DataTransform
 const models = require('../models/accMobile')
-var multer = require('multer')
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../uploads'));
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.name);
-    }
-})
-let upload = multer({
-    storage: storage
-})
-
 global.Headers = fetch.Headers
 
 // return users
@@ -43,14 +29,18 @@ router.get('/allUsers',
 )
 
 // return all incidents
+// TODO: get rid of this array
 let allIncidents = []
 router.get('/allIncidents',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
+            allIncidents = []
             try {
                 await electronicIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$top=5000")
                 await analogIncidents("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('GeocodedAdvises')/items?$top=5000")
+                // instead of relying on external array (which persists across calls), 
+                // return data from functions and merge here
                 const merged = allIncidents[0].concat(allIncidents[1])
                 res.status(200).send(merged)
             } catch (err) {
@@ -142,7 +132,7 @@ router.post('/attachmentMeta',
                     }),
                     body: JSON.stringify(req.body)
                 })
-                .then(res => res.json())
+                .then(res => console.log(res))
                 .catch(error => res.status(500).send(error))
             res.status(200).send()
         } else res.status(403).end()
