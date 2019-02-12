@@ -140,6 +140,7 @@ const officerInitials = {
 const comments = {
     list: 'value',
     item: {
+        dateTime: 'dateTime',
         incidentID: 'incidentID',
         user: 'user',
         comment: 'comment'

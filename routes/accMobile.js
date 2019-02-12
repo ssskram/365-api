@@ -201,7 +201,7 @@ router.get('/comments',
         } else res.status(403).end()
     }
 )
-router.post('/post',
+router.post('/comments',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
