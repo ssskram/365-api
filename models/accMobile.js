@@ -28,7 +28,6 @@ const electronicIncidents = {
         ownersTelephoneNumber: 'OwnersTelephone',
         pghCode: 'ADVPGHCode',
         citationNumber: 'CitationNumber',
-        comments: 'Comments',
         callOrigin: 'CallOrigin',
         submittedBy: 'SubmittedBy',
         modifiedBy: 'ModifiedBy',
