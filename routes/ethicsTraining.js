@@ -24,7 +24,7 @@ router.get('/courseHistory',
                 })
                 .then(res => res.json())
                 .then(data => {
-                    res.status(200).send(dt(data, models.course).transform())
+                    res.status(200).send(dt(data.d, models.course).transform())
                 })
                 .catch(err => console.log(err))
         } else res.status(403).end()

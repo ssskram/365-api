@@ -4,7 +4,7 @@ const tz = require('moment-timezone')
 const dateTransform = (date) => moment(date).tz('America/New_York').format('MM-DD-YYYY, hh:mm A')
 
 const course = {
-    list: 'value',
+    list: 'results',
     item: {
         courseID: 'Id',
         started: 'Created',
