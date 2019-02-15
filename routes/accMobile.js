@@ -134,6 +134,28 @@ router.post('/attachmentMeta',
     }
 )
 
+// delete a record in the attachment table
+router.post('/deleteAttachment',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items(" + req.query.itemId + ")", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'IF-MATCH': "*",
+                        "X-HTTP-Method": "DELETE"
+                    }),
+                    body: JSON.stringify(req.body)
+                })
+                .catch(error => res.status(500).send(error))
+                .then(response => res.status(200).send())
+        } else res.status(403).end()
+    }
+)
+
+
 // create a new incident record
 router.post('/addIncident',
     async function (req, res) {
