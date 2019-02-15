@@ -135,7 +135,7 @@ router.post('/attachmentMeta',
 )
 
 // delete a record in the attachment table
-router.post('/deleteAttachment',
+router.get('/deleteAttachment',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
