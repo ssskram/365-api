@@ -45,10 +45,15 @@ const courseRegistrations = {
   list: 'value',
   item: {
     registrationId: 'Id',
+    registrationDate: 'Created',
     user: 'User',
     courseCode: 'Course_x0020_Code',
     registrationStatus: 'Registration_x0020_Status'
-  }
+  },
+  operate: [{
+    'run': dateTransform,
+    'on': 'registrationDate'
+  }]
 }
 
 const courses = {
