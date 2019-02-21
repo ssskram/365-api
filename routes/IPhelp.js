@@ -151,6 +151,27 @@ router.get('/allCourses',
     }
 )
 
+// get specific course
+router.get('/course',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/CourseRegistration/_api/web/lists/GetByTitle('Courses')/items?$filter=Course_x0020_Code eq '" + req.query.courseCode + "'", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.courses).transform())
+                })
+                .catch(err => console.log(err))
+        } else res.status(403).end()
+    }
+)
+
 // create a course registration record
 router.post('/newCourseRegistration',
     async function (req, res) {
