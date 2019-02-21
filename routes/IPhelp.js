@@ -213,4 +213,25 @@ router.post('/updateCourseRegistration',
     }
 )
 
+// get calendar event
+router.get('/courseRegistrationCalendarEvent',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/CourseRegistration/_api/web/lists/GetByTitle('Calendar Events')/items?$filter=Registration_x0020_ID eq '" + req.query.registrationID + "'", {
+                    method: 'get',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send(dt(data, models.calendarEvent).transform())
+                })
+                .catch(err => console.log(err))
+        } else res.status(403).end()
+    }
+)
+
 module.exports = router

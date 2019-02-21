@@ -28,7 +28,6 @@ const allEquipmentLoans = {
   }]
 }
 
-
 const allEquipment = {
   list: 'value',
   item: {
@@ -66,7 +65,7 @@ const courses = {
     startDate: 'Start_x0020_Date',
     endDate: 'End_x0020_Date',
     maximumCapacity: 'Maximum_x0020_Capacity',
-    courseLocation: 'Course_x0020_Location',
+    courseLocation: 'Course_x0020_Location'
   },
   operate: [{
     'run': dateTransform,
@@ -77,10 +76,18 @@ const courses = {
   }]
 }
 
+const calendarEvent = {
+  list: 'value',
+  item: {
+    registrationId: 'Registration_x0020_ID',
+    eventId: 'Event_x0020_ID'
+  }
+}
+
 module.exports = {
   allLiaisons,
   allEquipmentLoans,
   allEquipment,
   courseRegistrations,
-  courses
-}
+  courses,
+calendarEvent}
