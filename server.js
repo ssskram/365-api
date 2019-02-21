@@ -34,6 +34,7 @@ app.use("/ethicstraining", require('./routes/ethicsTraining'))
 app.use("/pghsupply", require('./routes/pghSupply'))
 app.use("/gbgb", require('./routes/gbgb'))
 app.use("/pghcerts", require('./routes/pghCerts'))
+app.use("/calendar", require('./routes/calendarEvents'))
 
 // production error handler
 if (app.get('env') === 'production') {
