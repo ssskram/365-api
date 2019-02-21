@@ -234,4 +234,24 @@ router.get('/courseRegistrationCalendarEvent',
     }
 )
 
+// create a calendar event record
+router.post('/courseRegistrationCalendarEvent',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/CourseRegistration/_api/web/lists/GetByTitle('Calendar Events')/items", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }),
+                    body: JSON.stringify(req.body)
+                })
+                .catch(error => res.status(500).send(error))
+                .then(() => res.status(200).send())
+        } else res.status(403).end()
+    }
+)
+
 module.exports = router
