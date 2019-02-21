@@ -65,7 +65,8 @@ const courses = {
     courseDescription: 'Course_x0020_Description',
     startDate: 'Start_x0020_Date',
     endDate: 'End_x0020_Date',
-    maximumCapacity: 'Maximum_x0020_Capacity'
+    maximumCapacity: 'Maximum_x0020_Capacity',
+    courseLocation: 'Course_x0020_Location',
   },
   operate: [{
     'run': dateTransform,
