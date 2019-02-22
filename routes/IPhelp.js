@@ -239,6 +239,7 @@ router.post('/courseRegistrationCalendarEvent',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
+            console.log(req.body)
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/CourseRegistration/_api/web/lists/GetByTitle('Calendar Events')/items", {
                     method: 'POST',
                     headers: new Headers({
@@ -249,7 +250,10 @@ router.post('/courseRegistrationCalendarEvent',
                     body: JSON.stringify(req.body)
                 })
                 .catch(error => res.status(500).send(error))
-                .then(() => res.status(200).send())
+                .then(response => {
+                    console.log(response)
+                    res.status(200).send()
+                })
         } else res.status(403).end()
     }
 )
