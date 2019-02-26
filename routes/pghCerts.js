@@ -145,7 +145,7 @@ router.post('/certHistory',
 )
 
 // update cert record
-router.post('/updateCourse',
+router.post('/updateCertRecord',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
