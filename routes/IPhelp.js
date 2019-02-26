@@ -251,7 +251,6 @@ router.post('/courseRegistrationCalendarEvent',
                 })
                 .catch(error => res.status(500).send(error))
                 .then(response => {
-                    console.log(response)
                     res.status(200).send()
                 })
         } else res.status(403).end()

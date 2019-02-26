@@ -22,7 +22,11 @@ router.get('/userProfile',
                 })
                 .then(res => res.json())
                 .then(data => {
-                    res.status(200).send(dt(data, models.userProfiles).transform())
+                    if (data.value.length > 0) {
+                        res.status(200).send(dt(data, models.userProfiles).transform())
+                    } else {
+                        res.status(404).end()
+                    }
                 })
                 .catch(err => console.log(err))
         } else res.status(403).end()
@@ -53,6 +57,28 @@ router.post('/userProfile',
         } else res.status(403).end()
     }
 )
+
+// updates existing user profile
+router.put('/userProfile',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items(" + req.query.id + ")", {
+                    method: 'MERGE',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        "IF-MATCH": "*"
+                    }),
+                    body: JSON.stringify(req.body)
+                })
+                .then(() => res.status(200))
+                .catch(error => res.status(500).send(error))
+        } else res.status(403).end()
+    }
+)
+
 
 // returns true if supplied email param is contained in SP group
 router.get('/isAdmin',
