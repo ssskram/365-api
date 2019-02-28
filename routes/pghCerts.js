@@ -27,7 +27,6 @@ router.get('/allUserProfile',
     }
 )
 
-
 // returns user profile, if existent
 router.get('/userProfile',
     async function (req, res) {
@@ -185,8 +184,11 @@ router.post('/certHistory',
                     }),
                     body: JSON.stringify(req.body)
                 })
-                .then(() => res.status(200).send())
                 .catch(error => res.status(500).send(error))
+                .then(response => response.json())
+                .then(data => res.status(200).send({
+                    entryId: data.Id
+                }))
         } else res.status(403).end()
     }
 )
@@ -206,8 +208,28 @@ router.post('/updateCertRecord',
                     }),
                     body: JSON.stringify(req.body)
                 })
-                .then(res.status(200).send())
                 .catch(error => res.status(500).send(error))
+                .then(res.status(200).send())
+        } else res.status(403).end()
+    }
+)
+
+// update cert record
+router.delete('/deleteCertRecord',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Cert History')/items(" + req.query.id + ")", {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json',
+                        'IF-MATCH': "*",
+                        "X-HTTP-Method": "DELETE"
+                    }),
+                })
+                .catch(error => res.status(500).send(error))
+                .then(() => res.status(200).send())
         } else res.status(403).end()
     }
 )
