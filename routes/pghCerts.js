@@ -8,6 +8,26 @@ const models = require('../models/pghCerts')
 
 global.Headers = fetch.Headers
 
+// returns all user profiles
+router.get('/allUserProfile',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items", {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': 'Bearer ' + await refreshToken(),
+                        'Accept': 'application/json'
+                    })
+                })
+                .then(res => res.json())
+                .then(data => res.status(200).send(dt(data, models.userProfiles).transform()))
+                .catch(err => res.status(500).send(err))
+        } else res.status(403).end()
+    }
+)
+
+
 // returns user profile, if existent
 router.get('/userProfile',
     async function (req, res) {
