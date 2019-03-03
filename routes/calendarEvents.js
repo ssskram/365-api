@@ -12,14 +12,14 @@ router.post('/newEvent',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://graph.microsoft.com/v1.0/users/" + req.query.user + "/calendar/events", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await calendarToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await calendarToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .then(response => response.json())
                 .then(data => res.status(200).send(data.id))
         } else res.status(403).end()
