@@ -6,7 +6,8 @@ const dateTransform = (date) => moment(date).tz('America/New_York').format('MM-D
 const allLiaisons = {
   list: 'value',
   item: {
-    user: 'Title'
+    user: 'Title',
+    department: 'department'
   }
 }
 

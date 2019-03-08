@@ -13,12 +13,11 @@ SECTION
 I&P liaisons, access control
 */
 
-// return list of liaisons
 router.get('/allLiaisons',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/InPHelp/_api/web/lists/GetByTitle('Equipment')/items?$select=Title", {
+            fetch("https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/InPHelp/_api/web/lists/GetByTitle('Equipment')/items?$select=Title,department", {
                     method: 'get',
                     headers: new Headers({
                         'Authorization': 'Bearer ' + await refreshToken(),
@@ -27,6 +26,7 @@ router.get('/allLiaisons',
                 })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     res.status(200).send(dt(data, models.allLiaisons).transform())
                 })
                 .catch(err => console.log(err))
