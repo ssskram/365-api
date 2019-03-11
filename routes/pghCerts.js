@@ -14,12 +14,12 @@ router.get('/allUserProfile',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items", {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => res.status(200).send(dt(data, models.userProfiles).transform()))
                 .catch(err => res.status(500).send(err))
@@ -33,12 +33,12 @@ router.get('/userProfile',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items?$filter=Email eq '" + req.query.user + "'", {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     if (data.value.length > 0) {
@@ -58,14 +58,14 @@ router.post('/userProfile',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send({
@@ -83,15 +83,15 @@ router.put('/userProfile',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('User Profiles')/items(" + req.query.id + ")", {
-                    method: 'MERGE',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        "IF-MATCH": "*"
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'MERGE',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "IF-MATCH": "*"
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .then(() => res.status(200))
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
@@ -105,12 +105,12 @@ router.get('/isAdmin',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/sitegroups(8)/users?$select=Email", {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     if (data["value"].find(admin => admin.Email == req.query.user)) {
@@ -134,12 +134,12 @@ router.get('/certTypes',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Certifications')/items?$top=5000", {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.certs).transform())
@@ -155,12 +155,12 @@ router.get('/certHistory',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Cert History')/items?$top=5000", {
-                    method: 'GET',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.certHistory).transform())
@@ -176,14 +176,14 @@ router.post('/certHistory',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Cert History')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(response => response.json())
                 .then(data => res.status(200).send({
@@ -199,15 +199,15 @@ router.post('/updateCertRecord',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Cert History')/items(" + req.query.id + ")", {
-                    method: 'MERGE',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        "IF-MATCH": "*"
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'MERGE',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "IF-MATCH": "*"
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(res.status(200).send())
         } else res.status(403).end()
@@ -220,14 +220,14 @@ router.delete('/deleteCertRecord',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/certs/_api/web/lists/GetByTitle('Cert History')/items(" + req.query.id + ")", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'IF-MATCH': "*",
-                        "X-HTTP-Method": "DELETE"
-                    }),
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'IF-MATCH': "*",
+                    "X-HTTP-Method": "DELETE"
+                }),
+            })
                 .catch(error => res.status(500).send(error))
                 .then(() => res.status(200).send())
         } else res.status(403).end()

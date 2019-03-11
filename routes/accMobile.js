@@ -13,12 +13,12 @@ router.get('/allUsers',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Accmobileusers')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.allUsers).transform())
@@ -46,12 +46,12 @@ router.get('/allIncidents',
 )
 const electronicIncidents = async (url) => {
     const ei = await fetch(url, {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': 'Bearer ' + await refreshToken(),
-                'Accept': 'application/json'
-            })
+        method: 'get',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + await refreshToken(),
+            'Accept': 'application/json'
         })
+    })
         .then(res => res.json())
         .then(data => dt(data, models.electronicIncidents).transform())
         .catch(err => console.log(err))
@@ -59,12 +59,12 @@ const electronicIncidents = async (url) => {
 }
 const analogIncidents = async (url) => {
     const ai = await fetch(url, {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': 'Bearer ' + await refreshToken(),
-                'Accept': 'application/json'
-            })
+        method: 'get',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + await refreshToken(),
+            'Accept': 'application/json'
         })
+    })
         .then(res => res.json())
         .then(data => dt(data, models.analogIncidents).transform())
         .catch(err => console.log(err))
@@ -77,12 +77,12 @@ router.get('/selectIncident',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items?$filter=AdvisoryID eq '" + req.query.AdvisoryID + "'", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.electronicIncidents).transform())
@@ -98,12 +98,12 @@ router.get('/attachments',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items?$filter=incidentID eq '" + req.query.incidentID + "'", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.attachments).transform())
@@ -119,14 +119,14 @@ router.post('/attachmentMeta',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .then(res => console.log(res))
                 .catch(error => res.status(500).send(error))
             res.status(200).send()
@@ -140,15 +140,15 @@ router.get('/deleteAttachment',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Attachments')/items(" + req.query.itemId + ")", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'IF-MATCH': "*",
-                        "X-HTTP-Method": "DELETE"
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'IF-MATCH': "*",
+                    "X-HTTP-Method": "DELETE"
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(response => res.status(200).send())
         } else res.status(403).end()
@@ -162,14 +162,14 @@ router.post('/addIncident',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(response => res.status(200).send())
         } else res.status(403).end()
@@ -182,16 +182,16 @@ router.post('/updateIncident',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Incidents')/items(" + req.body.Id + ")", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'X-HTTP-Method': 'MERGE',
-                        'IF-MATCH': '*'
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-HTTP-Method': 'MERGE',
+                    'IF-MATCH': '*'
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(ressponse => res.status(200).send())
         } else res.status(403).end()
@@ -204,12 +204,12 @@ router.get('/comments',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items?$filter=incidentID eq '" + req.query.incidentID + "'", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.comments).transform())
@@ -223,14 +223,36 @@ router.post('/comments',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    res.status(200).send()
                 })
+                .catch(error => res.status(500).send(error))
+        } else res.status(403).end()
+    }
+)
+router.put('/comment',
+    async function (req, res) {
+        const valid = (checkToken(req.token))
+        if (valid == true) {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items(" + req.body.commentId + ")", {
+                method: 'MERGE',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "IF-MATCH": "*"
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send()
@@ -248,12 +270,12 @@ router.get('/selectAnimals',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Animals')/items?$filter=AdvisoryID eq '" + req.query.AdvisoryID + "'", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.animals).transform())
@@ -269,14 +291,14 @@ router.post('/addAnimal',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Animals')/items", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(response => res.status(200).send())
         } else res.status(403).end()
@@ -289,16 +311,16 @@ router.post('/updateAnimal',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Animals')/items(" + req.body.Id + ")", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'X-HTTP-Method': 'MERGE',
-                        'IF-MATCH': '*'
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-HTTP-Method': 'MERGE',
+                    'IF-MATCH': '*'
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(ressponse => res.status(200).send())
         } else res.status(403).end()
@@ -311,15 +333,15 @@ router.post('/deleteAnimal',
         const valid = (checkToken(req.token))
         if (valid == true) {
             await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Animals')/items(" + req.query.itemId + ")", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json',
-                        'IF-MATCH': "*",
-                        "X-HTTP-Method": "DELETE"
-                    }),
-                    body: JSON.stringify(req.body)
-                })
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json',
+                    'IF-MATCH': "*",
+                    "X-HTTP-Method": "DELETE"
+                }),
+                body: JSON.stringify(req.body)
+            })
                 .catch(error => res.status(500).send(error))
                 .then(ressponse => res.status(200).send())
         } else res.status(403).end()
@@ -332,12 +354,12 @@ router.get('/animalBreeds',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalBreeds')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.animalBreeds).transform())
@@ -353,12 +375,12 @@ router.get('/animalCoats',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('animalCoats')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.animalCoats).transform())
@@ -374,12 +396,12 @@ router.get('/vets',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Veterinarians')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.vets).transform())
@@ -395,12 +417,12 @@ router.get('/reasonsForVisit',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('reasonsForVisit')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.reasonsForVisit).transform())
@@ -416,12 +438,12 @@ router.get('/callOrigins',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('callOrigins')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.callOrigins).transform())
@@ -437,12 +459,12 @@ router.get('/citationNumbers',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('citationNumbers')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.citationNumbers).transform())
@@ -458,12 +480,12 @@ router.get('/officerInitials',
         const valid = (checkToken(req.token))
         if (valid == true) {
             fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('officerInitials')/items", {
-                    method: 'get',
-                    headers: new Headers({
-                        'Authorization': 'Bearer ' + await refreshToken(),
-                        'Accept': 'application/json'
-                    })
+                method: 'get',
+                headers: new Headers({
+                    'Authorization': 'Bearer ' + await refreshToken(),
+                    'Accept': 'application/json'
                 })
+            })
                 .then(res => res.json())
                 .then(data => {
                     res.status(200).send(dt(data, models.officerInitials).transform())
