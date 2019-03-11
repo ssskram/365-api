@@ -243,7 +243,7 @@ router.put('/comment',
     async function (req, res) {
         const valid = (checkToken(req.token))
         if (valid == true) {
-            await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items(" + req.body.commentId + ")", {
+            await fetch("https://cityofpittsburgh.sharepoint.com/sites/PublicSafety/ACC/_api/web/lists/GetByTitle('Comments')/items(" + req.query.id + ")", {
                 method: 'MERGE',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + await refreshToken(),
@@ -253,15 +253,11 @@ router.put('/comment',
                 }),
                 body: JSON.stringify(req.body)
             })
-                .then(res => res.json())
-                .then(data => {
-                    res.status(200).send()
-                })
+                .then(() => res.status(200).send())
                 .catch(error => res.status(500).send(error))
         } else res.status(403).end()
     }
 )
-
 
 
 // return animals per advisory ID
