@@ -32,6 +32,7 @@ const electronicIncidents = {
         submittedBy: 'SubmittedBy',
         modifiedBy: 'ModifiedBy',
         officerInitials: 'Officers',
+        comments: 'Comments',
         open: 'Open'
     },
     operate: [{
@@ -137,17 +138,6 @@ const officerInitials = {
     }
 }
 
-const comments = {
-    list: 'value',
-    item: {
-        commentId: 'Id',
-        dateTime: 'dateTime',
-        incidentID: 'incidentID',
-        user: 'user',
-        comment: 'comment'
-    }
-}
-
 module.exports = {
     allUsers,
     electronicIncidents,
@@ -160,6 +150,5 @@ module.exports = {
     callOrigins,
     citationNumbers,
     officerInitials,
-    attachments,
-    comments
+    attachments
 }
