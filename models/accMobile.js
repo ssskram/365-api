@@ -2,7 +2,7 @@ const moment = require('moment')
 const tz = require('moment-timezone')
 
 // transforms
-const dateTransform = (date) => moment(date).tz('America/New_York').format('MM-DD-YYYY, hh:mm A')
+const dateTransform = (date) => moment(date).tz('America/New_York').format('MM/DD/YYYY, hh:mm A')
 const returnLink = (uuid) => "Report/id=" + uuid
 
 const allUsers = {
