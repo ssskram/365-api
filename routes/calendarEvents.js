@@ -1,46 +1,35 @@
 const express = require('express')
 const router = express.Router()
-const checkToken = require('../token')
 const fetch = require('node-fetch')
 const toBody = require('../util/objectToParams')
 
-global.Headers = fetch.Headers
-
 // new calendar event
-router.post('/newEvent',
-    async function (req, res) {
-        const valid = (checkToken(req.token))
-        if (valid == true) {
-            fetch("https://graph.microsoft.com/v1.0/users/" + req.query.user + "/calendar/events", {
-                method: 'POST',
-                headers: new Headers({
-                    'Authorization': 'Bearer ' + await calendarToken(),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }),
-                body: JSON.stringify(req.body)
-            })
-                .then(response => response.json())
-                .then(data => res.status(200).send(data.id))
-        } else res.status(403).end()
-    }
-)
+router.post('/newEvent', async (req, res) => {
+    fetch("https://graph.microsoft.com/v1.0/users/" + req.query.user + "/calendar/events", {
+        method: 'POST',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + await calendarToken(),
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(req.body)
+    })
+        .then(response => response.json())
+        .then(data => res.status(200).send(data.id))
+        .catch(err => res.status(500).send(err))
+})
 
 // delete calendar event
-router.post('/deleteEvent',
-    async function (req, res) {
-        const valid = (checkToken(req.token))
-        if (valid == true) {
-            fetch("https://graph.microsoft.com/v1.0/users/" + req.query.user + "/calendar/events/" + req.query.eventId, {
-                method: 'DELETE',
-                headers: new Headers({
-                    'Authorization': 'Bearer ' + await calendarToken()
-                })
-            })
-            res.status(200).end()
-        } else res.status(403).end()
-    }
-)
+router.post('/deleteEvent', async (req, res) => {
+    fetch("https://graph.microsoft.com/v1.0/users/" + req.query.user + "/calendar/events/" + req.query.eventId, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + await calendarToken()
+        })
+    })
+    .then(() => res.status(200).end())
+    .catch(err => res.status(500).send(err))
+})
 
 const calendarToken = async () => {
     const params = {
