@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const checkToken = require("../token");
 const refreshToken = require("../refresh");
 const fetch = require("node-fetch");
 const dt = require("node-json-transform").DataTransform;
