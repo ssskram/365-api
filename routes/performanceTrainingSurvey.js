@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 // create a course record
 router.post("/submission", async (req, res) => {
   await fetch(
-    "https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/PTS/_api/web/lists/GetByTitle('Data')/items",
+    "https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/PTS/_api/web/lists/GetByTitle('Performance Training Survey')/items",
     {
       method: "POST",
       headers: new Headers({
