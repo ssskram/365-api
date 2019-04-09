@@ -12,9 +12,7 @@ const certs = {
   list: "value",
   item: {
     certID: "Certification_x0020_ID",
-    certName: "Certification",
-    ICC: "ICC",
-    UCC: "UCC"
+    certName: "Certification"
   }
 };
 
@@ -24,7 +22,8 @@ const certHistory = {
     entryId: "Id",
     user: "User",
     certId: "Certification_x0020_ID",
-    date: "Date"
+    iccExp: "ICC_x0020_Exp",
+    uccExp: "UCC_x0020_Exp"
   }
 };
 
