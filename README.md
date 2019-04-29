@@ -10,4 +10,9 @@ Bearer token.  Just ask for it
 
 Swagger UI:
 
+
+## Refresh token
+Last refresh = 4/29/2019
+Good for six months
+
 https://365proxy.azurewebsites.us/docs
