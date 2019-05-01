@@ -14,7 +14,7 @@ const travelTraining = {
     id: "Id",
     url: "Title",
     officerName: "Officer_x0020_Name",
-    trainingRequested: "Travel_x0020_Training_x0020_Requested",
+    trainingRequested: "Training_x0020_Travel_x0020_Requested",
     startDate: "Start_x0020_Date",
     endDate: "End_x0020_Date",
     submitted: "Created",
