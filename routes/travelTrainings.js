@@ -49,4 +49,28 @@ router.get("/item", async (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+// updates an existing incident
+router.post("/setLastNotice", async (req, res) => {
+  await fetch(
+    "https://cityofpittsburgh.sharepoint.com/sites/Police/_api/web/lists/GetByTitle('TravelTraining')/items(" +
+      req.query.itemID +
+      ")",
+    {
+      method: "POST",
+      headers: new Headers({
+        Authorization: "Bearer " + (await refreshToken()),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-HTTP-Method": "MERGE",
+        "IF-MATCH": "*"
+      }),
+      body: JSON.stringify({
+        LastNotice: req.query.lastNotice
+      })
+    }
+  )
+    .then(() => res.status(200).send())
+    .catch(error => res.status(500).send(error));
+});
+
 module.exports = router;
