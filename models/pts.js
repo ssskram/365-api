@@ -6,7 +6,8 @@ const responses = {
     submitted: "Created",
     budgets: "Budgets",
     processes: "Processes",
-    goalsAndTraining: "Goals_x0020_and_x0020_Training"
+    goalsAndTraining: "Goals_x0020_and_x0020_Training",
+    data: "Data"
   }
 };
 
