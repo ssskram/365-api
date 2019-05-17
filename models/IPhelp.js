@@ -53,6 +53,7 @@ const courseRegistrations = {
     registrationId: "Id",
     registrationDate: "Created",
     user: "User",
+    hasEmail: "Has_x0020_Email",
     courseCode: "Course_x0020_Code",
     registrationStatus: "Registration_x0020_Status"
   },
