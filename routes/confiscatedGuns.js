@@ -3,13 +3,13 @@ const router = express.Router();
 const refreshToken = require("../refresh");
 const fetch = require("node-fetch");
 const dt = require("node-json-transform").DataTransform;
-const models = require("../models/IPhelp");
+const models = require("../models/confiscatedGuns");
 
 global.Headers = fetch.Headers;
 
-router.get("/allLiaisons", async (req, res) => {
+router.get("/allUsers", async (req, res) => {
   fetch(
-    "https://cityofpittsburgh.sharepoint.com/sites/InnovationandPerformance/InPHelp/_api/web/lists/GetByTitle('Equipment')/items?$select=Title,department",
+    "https://cityofpittsburgh.sharepoint.com/sites/Police/ConfiscatedGuns/_api/web/sitegroups(626)/users?$select=Email",
     {
       method: "get",
       headers: new Headers({
@@ -20,7 +20,7 @@ router.get("/allLiaisons", async (req, res) => {
   )
     .then(res => res.json())
     .then(data => {
-      res.status(200).send(dt(data, models.allLiaisons).transform());
+      res.status(200).send(dt(data, models.allUsers).transform());
     })
     .catch(err => res.status(500).send(err));
 });

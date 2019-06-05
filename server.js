@@ -48,6 +48,7 @@ app.use("/pghsupply", require("./routes/pghSupply"));
 app.use("/pghcerts", require("./routes/pghCerts"));
 app.use("/calendar", require("./routes/calendarEvents"));
 app.use("/travelTrainings", require("./routes/travelTrainings"));
+app.use("/confiscatedGuns", require("./routes/confiscatedGuns"));
 
 // Production error handler
 if (app.get("env") === "production") {
