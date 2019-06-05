@@ -47,7 +47,6 @@ app.use("/ethicstraining", require("./routes/ethicsTraining"));
 app.use("/pghsupply", require("./routes/pghSupply"));
 app.use("/pghcerts", require("./routes/pghCerts"));
 app.use("/calendar", require("./routes/calendarEvents"));
-app.use("/pts", require("./routes/performanceTrainingSurvey"));
 app.use("/travelTrainings", require("./routes/travelTrainings"));
 
 // Production error handler
