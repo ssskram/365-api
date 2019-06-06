@@ -30,7 +30,6 @@ const allGuns = {
     name: "name",
     dateOfBirth: "dateOfBirth",
     operatorsLicenseNumber: "operatorsLicenseNumber",
-    operatorsLicenseNumber: "operatorsLicenseNumber",
     licenseState: "licenseState",
     possessedByProhibitedPerson: "possessedByProhibitedPerson",
     chargedWithCrime: "chargedWithCrime",
