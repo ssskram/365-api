@@ -35,7 +35,8 @@ const allGuns = {
     chargedWithCrime: "chargedWithCrime",
     permitInLTC: "permitInLTC",
     createdBy: "createdBy",
-    created: "Created"
+    created: "Created",
+    postedNCIC: "postedNCIC"
   },
   operate: [
     {
