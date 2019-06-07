@@ -36,7 +36,8 @@ const allGuns = {
     permitInLTC: "permitInLTC",
     createdBy: "createdBy",
     created: "Created",
-    postedNCIC: "postedNCIC"
+    postedNCIC: "postedNCIC",
+    spID: "Id"
   },
   operate: [
     {
