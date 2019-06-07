@@ -63,4 +63,26 @@ router.post("/newRecord", async (req, res) => {
     .catch(error => res.status(500).send(error));
 });
 
+// update a confiscation record
+router.post("/updateRecord", async (req, res) => {
+  await fetch(
+    "https://cityofpittsburgh.sharepoint.com/sites/Police/ConfiscatedGuns/_api/web/lists/GetByTitle('Confiscated Guns')/items(" +
+      req.body.Id +
+      ")",
+    {
+      method: "POST",
+      headers: new Headers({
+        Authorization: "Bearer " + (await refreshToken()),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-HTTP-Method": "MERGE",
+        "IF-MATCH": "*"
+      }),
+      body: JSON.stringify(req.body)
+    }
+  )
+    .then(() => res.status(200).send())
+    .catch(error => res.status(500).send(error));
+});
+
 module.exports = router;
