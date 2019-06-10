@@ -15,7 +15,7 @@ Communication with the Sharepoint API is facilitated through an OAuth flow.  An 
 Last refresh: 4/29/2019  
 **Next refresh needed by 9/29/2019**
 
-For a step-by-step guide to regenerating the refresh token, see TOKEN.md
+For a step-by-step guide to regenerating the refresh token, see [TOKEN.md](TOKEN.md)
 
 
 ## File structure
