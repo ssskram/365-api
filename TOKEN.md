@@ -67,7 +67,7 @@ POST https://accounts.accesscontrol.windows.net/{ Tenant realm from step 2 }/tok
 
 Fire off the POST request, and inspect the response body for the refresh token:
 
-```JSON
+```
 {
     "token_type": "Bearer",
     ...
@@ -91,7 +91,7 @@ POST https://accounts.accesscontrol.windows.net/{ Tenant realm from step 2 }/tok
 
 Fire off the POST request, and inspect the response body for the access token:
 
-```JSON
+```
 {
     "token_type": "Bearer",
     ...
