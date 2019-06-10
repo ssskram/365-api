@@ -325,9 +325,9 @@ async function getAllDropdowns(calls) {
           .then(res => res.json())
           .then(data => dt(data, models[call.dataModel]).transform())
           .then(array => {
-            return { 
+            return {
               type: call.dataModel,
-              objects : array 
+              objects: array
             };
           })
       )
