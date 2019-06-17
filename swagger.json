@@ -257,6 +257,164 @@
                 }
             }
         },
+        "/accmobile/attachments": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Attachment meta",
+                "description": "Returns an array of metadata with which to grab images from blob",
+                "parameters": [{
+                    "name": "incidentID",
+                    "in": "query",
+                    "description": "UUID of incident",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "An array of image metadata",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "incidentID": {
+                                        "type": "string"
+                                    },
+                                    "relativePath": {
+                                        "type": "string"
+                                    },
+                                    "imageTitle": {
+                                        "type": "string"
+                                    },
+                                    "imageDescription": {
+                                        "type": "string"
+                                    },
+                                    "itemId": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/attachmentMeta": {
+            "post": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Creates a new meta record for image",
+                "description": "Passed an object of metadata for image created in blob",
+                "parameters": [{
+                        "name": "incidentID",
+                        "in": "body",
+                        "description": "UUID for incieent",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "relativePath",
+                        "in": "body",
+                        "description": "Path of image within blob",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "attachmentTitle",
+                        "in": "body",
+                        "description": "Title of image",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "attachmentDescription",
+                        "in": "body",
+                        "description": "Description of image",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/accmobile/deleteAttachment": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Deletes image meta",
+                "description": "Deletes metadata on image in blob",
+                "parameters": [{
+                    "name": "itemId",
+                    "in": "query",
+                    "description": "SP item ID",
+                    "required": true,
+                    "type": "number"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success!"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/accmobile/selectAnimals": {
             "get": {
                 "tags": [
@@ -321,306 +479,6 @@
                                         "type": "string"
                                     },
                                     "Comments": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/animalBreeds": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All animal breeds",
-                "description": "Array of animal breeds",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of animal breeds",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "breed": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/animalCoats": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All animal coats",
-                "description": "Array of animal coats",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of animal coats",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "coat": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/vets": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All veterinarians",
-                "description": "Array of vets",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of vets",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "vet": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/reasonsForVisit": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All reasons for visit",
-                "description": "Array of reasons for visit",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of reasons for visit",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "reason": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/callOrigins": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All call origins",
-                "description": "Array of call origins",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of call origins",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "origin": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/citationNumbers": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All citation numbers",
-                "description": "Array of citation numbers",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of citation numbers",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "citation": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/officerInitials": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All officer initials",
-                "description": "Array of officer initials",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Array of officer initials",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "initial": {
                                         "type": "string"
                                     }
                                 }
@@ -1224,6 +1082,40 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/accmobile/dropdowns": {
+            "get": {
+                "tags": [
+                    "ACC Mobile"
+                ],
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary": "Dropdown data",
+                "description": "Returns an array of all data for controlled fields",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "An array of data for controlled fields",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "objects": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access Denied"
                     }
                 }
             }
