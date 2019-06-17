@@ -2587,6 +2587,285 @@
           }
         }
       }
+    },
+    "/travelTrainings/allSubmittedItems": {
+      "get": {
+        "tags": ["PBP Travel/Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Travel/training records",
+        "description": "Returns all submitted items",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Array of travel/training records",
+            "schema": {
+              "type": "array",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "officerName": {
+                  "type": "string"
+                },
+                "officerSignature": {
+                  "type": "string"
+                },
+                "trainingRequested": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string"
+                },
+                "amountRequested": {
+                  "type": "string"
+                },
+                "firstForward": {
+                  "type": "string"
+                },
+                "firstApprovalSignature": {
+                  "type": "string"
+                },
+                "secondForward": {
+                  "type": "string"
+                },
+                "secondApprovalSignature": {
+                  "type": "string"
+                },
+                "thirdForward": {
+                  "type": "string"
+                },
+                "thirdApprovalSignature": {
+                  "type": "string"
+                },
+                "fourthForward": {
+                  "type": "string"
+                },
+                "fourthApprovalSignature": {
+                  "type": "string"
+                },
+                "fifthForward": {
+                  "type": "string"
+                },
+                "fifthApprovalSignature": {
+                  "type": "string"
+                },
+                "finalForward": {
+                  "type": "string"
+                },
+                "finalApprovalSignature": {
+                  "type": "string"
+                },
+                "lastNotice": {
+                  "type": "string"
+                },
+                "finalDenial": {
+                  "type": "string"
+                },
+                "finalApproval": {
+                  "type": "string"
+                },
+                "daysOnly": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/travelTrainings/item": {
+      "get": {
+        "tags": ["PBP Travel/Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Travel/training record",
+        "description": "Returns a single item",
+        "parameters": [
+          {
+            "name": "itemID",
+            "in": "query",
+            "description": "SP list ID",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Single record as object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "officerName": {
+                  "type": "string"
+                },
+                "officerSignature": {
+                  "type": "string"
+                },
+                "trainingRequested": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string"
+                },
+                "amountRequested": {
+                  "type": "string"
+                },
+                "firstForward": {
+                  "type": "string"
+                },
+                "firstApprovalSignature": {
+                  "type": "string"
+                },
+                "secondForward": {
+                  "type": "string"
+                },
+                "secondApprovalSignature": {
+                  "type": "string"
+                },
+                "thirdForward": {
+                  "type": "string"
+                },
+                "thirdApprovalSignature": {
+                  "type": "string"
+                },
+                "fourthForward": {
+                  "type": "string"
+                },
+                "fourthApprovalSignature": {
+                  "type": "string"
+                },
+                "fifthForward": {
+                  "type": "string"
+                },
+                "fifthApprovalSignature": {
+                  "type": "string"
+                },
+                "finalForward": {
+                  "type": "string"
+                },
+                "finalApprovalSignature": {
+                  "type": "string"
+                },
+                "lastNotice": {
+                  "type": "string"
+                },
+                "finalDenial": {
+                  "type": "string"
+                },
+                "finalApproval": {
+                  "type": "string"
+                },
+                "daysOnly": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/travelTrainings/setLastNotice": {
+      "post": {
+        "tags": ["PBP Travel/Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Updates LastNotice Field",
+        "description": "Accepts LastNotice in body as object",
+        "parameters": [
+          {
+            "name": "itemID",
+            "in": "query",
+            "description": "SP list ID",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "lastNotice",
+            "in": "body",
+            "description": "DateTime",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
