@@ -1965,6 +1965,351 @@
         }
       }
     },
+    "/iphelp/allCourseRegistrations": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Course registrations",
+        "description": "Returns all course registration records",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of registrations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "registrationId": {
+                    "type": "number"
+                  },
+                  "registrationDate": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "hasEmail": {
+                    "type": "boolean"
+                  },
+                  "courseCode": {
+                    "type": "string"
+                  },
+                  "registrationStatus": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/allCourses": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Course descriptions",
+        "description": "Returns all course descriptions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of courses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "courseId": {
+                    "type": "number"
+                  },
+                  "courseCode": {
+                    "type": "string"
+                  },
+                  "courseName": {
+                    "type": "string"
+                  },
+                  "courseDescription": {
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
+                  },
+                  "maximumCapacity": {
+                    "type": "number"
+                  },
+                  "courseLocation": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/course": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Single course",
+        "description": "Returns a single course description",
+        "parameters": [
+          {
+            "name": "courseCode",
+            "in": "query",
+            "description": "Course code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array with a single course object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "courseId": {
+                    "type": "number"
+                  },
+                  "courseCode": {
+                    "type": "string"
+                  },
+                  "courseName": {
+                    "type": "string"
+                  },
+                  "courseDescription": {
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
+                  },
+                  "maximumCapacity": {
+                    "type": "number"
+                  },
+                  "courseLocation": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/newCourseRegistration": {
+      "post": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "New course registration record",
+        "description": "Passed a new course registration record in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Course_x0020_Code",
+            "in": "body",
+            "description": "Course code",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Registration_x0020_Status",
+            "in": "body",
+            "description": "Active, Waitlisted, or Canceled",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/updateCourseRegistration": {
+      "post": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Updates course registration record",
+        "description": "Passed a new registration status in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id of registration reocrd",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "Registration_x0020_Status",
+            "in": "body",
+            "description": "Active, Waitlisted, or Canceled",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/courseRegistrationCalendarEvent": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Single calendar invite",
+        "description": "Returns calendar invite per registration ID",
+        "parameters": [
+          {
+            "name": "ReservationID",
+            "in": "query",
+            "description": "UUID generated on client",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calendar event metadata",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "registrationId": {
+                    "type": "string"
+                  },
+                  "eventId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/iphelp/allLiaisons": {
       "get": {
         "tags": ["I&P Help"],
