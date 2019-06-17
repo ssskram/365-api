@@ -1258,6 +1258,506 @@
         }
       }
     },
+    "/confiscatedGuns/allUsers": {
+      "get": {
+        "tags": ["Confiscated Guns"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All users",
+        "description": "All users with access to Confiscated Guns",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of email addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/confiscatedGuns/allRecords": {
+      "get": {
+        "tags": ["Confiscated Guns"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All gun records",
+        "description": "All confiscated guns",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of gun recirds",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "serialNumber": {
+                    "type": "string"
+                  },
+                  "gunMake": {
+                    "type": "string"
+                  },
+                  "gunModel": {
+                    "type": "string"
+                  },
+                  "gunCaliber": {
+                    "type": "string"
+                  },
+                  "dateOfRecovery": {
+                    "type": "string"
+                  },
+                  "gunType": {
+                    "type": "string"
+                  },
+                  "originatingAgencyCaseNumber": {
+                    "type": "string"
+                  },
+                  "linkageAgencyIdentifier": {
+                    "type": "string"
+                  },
+                  "linkageAgencyCaseNumber": {
+                    "type": "string"
+                  },
+                  "notifyOriginatingAgency": {
+                    "type": "string"
+                  },
+                  "miscellaneous": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "dateOfBirth": {
+                    "type": "string"
+                  },
+                  "operatorsLicenseNumber": {
+                    "type": "string"
+                  },
+                  "licenseState": {
+                    "type": "string"
+                  },
+                  "possessedByProhibitedPerson": {
+                    "type": "string"
+                  },
+                  "chargedWithCrime": {
+                    "type": "string"
+                  },
+                  "permitInLTC": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "string"
+                  },
+                  "created": {
+                    "type": "string"
+                  },
+                  "postedNCIC": {
+                    "type": "string"
+                  },
+                  "spID": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/confiscatedGuns/newRecord": {
+      "post": {
+        "tags": ["Confiscated Guns"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Creates a gun record",
+        "description": "Creates a new gun record",
+        "parameters": [
+          {
+            "name": "serialNumber",
+            "in": "body",
+            "description": "Serial number of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunMake",
+            "in": "body",
+            "description": "Make of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunModel",
+            "in": "body",
+            "description": "Model of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunCaliber",
+            "in": "body",
+            "description": "Caliber of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "dateOfRecovery",
+            "in": "body",
+            "description": "Date gun was recovered",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunType",
+            "in": "body",
+            "description": "Type of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "originatingAgencyCaseNumber",
+            "in": "body",
+            "description": "Case number, originating agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "linkageAgencyIdentifier",
+            "in": "body",
+            "description": "Unique identifier, final agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "linkageAgencyCaseNumber",
+            "in": "body",
+            "description": "Case number, final agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "notifyOriginatingAgency",
+            "in": "body",
+            "description": "Was original agency notified? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "miscellaneous",
+            "in": "body",
+            "description": "Notes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Name of gun owner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "dateOfBirth",
+            "in": "body",
+            "description": "Date of birth",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "operatorsLicenseNumber",
+            "in": "body",
+            "description": "Driver's license number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "licenseState",
+            "in": "body",
+            "description": "License state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "possessedByProhibitedPerson",
+            "in": "body",
+            "description": "Was gun possessed by prohibited person? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "chargedWithCrime",
+            "in": "body",
+            "description": "Was person charged with crime? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "permitInLTC",
+            "in": "body",
+            "description": "Is gun permit in database? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "createdBy",
+            "in": "body",
+            "description": "Record created by, user's email address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "postedNCIC",
+            "in": "body",
+            "description": "Has record been submitted to NCIC? Yes or no",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/confiscatedGuns/updateRecord": {
+      "post": {
+        "tags": ["Confiscated Guns"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Updates a gun record",
+        "description": "Updates an existing gun record",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "body",
+            "description": "SP item ID",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "serialNumber",
+            "in": "body",
+            "description": "Serial number of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunMake",
+            "in": "body",
+            "description": "Make of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunModel",
+            "in": "body",
+            "description": "Model of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunCaliber",
+            "in": "body",
+            "description": "Caliber of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "dateOfRecovery",
+            "in": "body",
+            "description": "Date gun was recovered",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "gunType",
+            "in": "body",
+            "description": "Type of gun",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "originatingAgencyCaseNumber",
+            "in": "body",
+            "description": "Case number, originating agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "linkageAgencyIdentifier",
+            "in": "body",
+            "description": "Unique identifier, final agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "linkageAgencyCaseNumber",
+            "in": "body",
+            "description": "Case number, final agency",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "notifyOriginatingAgency",
+            "in": "body",
+            "description": "Was original agency notified? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "miscellaneous",
+            "in": "body",
+            "description": "Notes",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Name of gun owner",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "dateOfBirth",
+            "in": "body",
+            "description": "Date of birth",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "operatorsLicenseNumber",
+            "in": "body",
+            "description": "Driver's license number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "licenseState",
+            "in": "body",
+            "description": "License state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "possessedByProhibitedPerson",
+            "in": "body",
+            "description": "Was gun possessed by prohibited person? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "chargedWithCrime",
+            "in": "body",
+            "description": "Was person charged with crime? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "permitInLTC",
+            "in": "body",
+            "description": "Is gun permit in database? Yes or no",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "createdBy",
+            "in": "body",
+            "description": "Record created by, user's email address",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "postedNCIC",
+            "in": "body",
+            "description": "Has record been submitted to NCIC? Yes or no",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ethicstraining/courseHistory": {
       "get": {
         "tags": ["Ethics Training"],
