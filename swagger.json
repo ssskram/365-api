@@ -1,1603 +1,1747 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "365 Proxy",
-        "description": "Handles all traffic between MS 365 and client applications",
-        "version": "1.0.0"
-    },
-    "host": "365proxy.azurewebsites.us",
-    "schemes": [
-        "https"
-    ],
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "paths": {
-        "/accmobile/allUsers": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All Users",
-                "description": "Returns an array of all users",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of user email addresses",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "user": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/allIncidents": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All Incidents",
-                "description": "Returns an array of all incidents",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of incident accounts",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
-                                    },
-                                    "link": {
-                                        "type": "string"
-                                    },
-                                    "date": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "itemId": {
-                                        "type": "number"
-                                    },
-                                    "coords": {
-                                        "type": "string"
-                                    },
-                                    "reasonForVisit": {
-                                        "type": "string"
-                                    },
-                                    "note": {
-                                        "type": "string"
-                                    },
-                                    "ownersLastName": {
-                                        "type": "string"
-                                    },
-                                    "ownersFirstName": {
-                                        "type": "string"
-                                    },
-                                    "ownersTelephoneNumber": {
-                                        "type": "string"
-                                    },
-                                    "pghCode": {
-                                        "type": "string"
-                                    },
-                                    "citationNumber": {
-                                        "type": "string"
-                                    },
-                                    "comments": {
-                                        "type": "string"
-                                    },
-                                    "callOrigin": {
-                                        "type": "string"
-                                    },
-                                    "submittedBy": {
-                                        "type": "string"
-                                    },
-                                    "modifiedBy": {
-                                        "type": "string"
-                                    },
-                                    "officerInitials": {
-                                        "type": "string"
-                                    },
-                                    "open": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/selectIncident": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Single incident",
-                "description": "Returns an array with a single incident object",
-                "parameters": [{
-                    "name": "AdvisoryID",
-                    "in": "query",
-                    "description": "UUID of incident",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "An array of with a single incident object",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "uuid": {
-                                        "type": "string"
-                                    },
-                                    "link": {
-                                        "type": "string"
-                                    },
-                                    "date": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "itemId": {
-                                        "type": "number"
-                                    },
-                                    "coords": {
-                                        "type": "string"
-                                    },
-                                    "reasonForVisit": {
-                                        "type": "string"
-                                    },
-                                    "note": {
-                                        "type": "string"
-                                    },
-                                    "ownersLastName": {
-                                        "type": "string"
-                                    },
-                                    "ownersFirstName": {
-                                        "type": "string"
-                                    },
-                                    "ownersTelephoneNumber": {
-                                        "type": "string"
-                                    },
-                                    "pghCode": {
-                                        "type": "string"
-                                    },
-                                    "citationNumber": {
-                                        "type": "string"
-                                    },
-                                    "comments": {
-                                        "type": "string"
-                                    },
-                                    "callOrigin": {
-                                        "type": "string"
-                                    },
-                                    "submittedBy": {
-                                        "type": "string"
-                                    },
-                                    "modifiedBy": {
-                                        "type": "string"
-                                    },
-                                    "officerInitials": {
-                                        "type": "string"
-                                    },
-                                    "open": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/attachments": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Attachment meta",
-                "description": "Returns an array of metadata with which to grab images from blob",
-                "parameters": [{
-                    "name": "incidentID",
-                    "in": "query",
-                    "description": "UUID of incident",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "An array of image metadata",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "incidentID": {
-                                        "type": "string"
-                                    },
-                                    "relativePath": {
-                                        "type": "string"
-                                    },
-                                    "imageTitle": {
-                                        "type": "string"
-                                    },
-                                    "imageDescription": {
-                                        "type": "string"
-                                    },
-                                    "itemId": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/attachmentMeta": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Creates a new meta record for image",
-                "description": "Passed an object of metadata for image created in blob",
-                "parameters": [{
-                        "name": "incidentID",
-                        "in": "body",
-                        "description": "UUID for incieent",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "relativePath",
-                        "in": "body",
-                        "description": "Path of image within blob",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "attachmentTitle",
-                        "in": "body",
-                        "description": "Title of image",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "attachmentDescription",
-                        "in": "body",
-                        "description": "Description of image",
-                        "type": "string",
-                        "required": false
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/deleteAttachment": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Deletes image meta",
-                "description": "Deletes metadata on image in blob",
-                "parameters": [{
-                    "name": "itemId",
-                    "in": "query",
-                    "description": "SP item ID",
-                    "required": true,
-                    "type": "number"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/selectAnimals": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Animals per incident",
-                "description": "Returns an array with all animals associated with incident",
-                "parameters": [{
-                    "name": "AdvisoryID",
-                    "in": "query",
-                    "description": "UUID of incident",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "An array of animals records",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "itemID": {
-                                        "type": "number"
-                                    },
-                                    "incidentID": {
-                                        "type": "string"
-                                    },
-                                    "animalName": {
-                                        "type": "string"
-                                    },
-                                    "animalType": {
-                                        "type": "string"
-                                    },
-                                    "animalBreed": {
-                                        "type": "string"
-                                    },
-                                    "animalCoat": {
-                                        "type": "string"
-                                    },
-                                    "animalSex": {
-                                        "type": "string"
-                                    },
-                                    "animalAge": {
-                                        "type": "string"
-                                    },
-                                    "LicenseNo": {
-                                        "type": "string"
-                                    },
-                                    "LicenseYear": {
-                                        "type": "string"
-                                    },
-                                    "RabbiesVacNo": {
-                                        "type": "string"
-                                    },
-                                    "RabbiesVacExp": {
-                                        "type": "string"
-                                    },
-                                    "Vet": {
-                                        "type": "string"
-                                    },
-                                    "Comments": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/addIncident": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Creates a new incident record",
-                "description": "Passed a new incident record in body, formatted for SP",
-                "parameters": [{
-                        "name": "OwnersFirstName",
-                        "in": "body",
-                        "description": "Owner's first name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "OwnersLastName",
-                        "in": "body",
-                        "description": "Owner's last name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "OwnersTelephone",
-                        "in": "body",
-                        "description": "Owner's telephone number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "ReasonforVisit",
-                        "in": "body",
-                        "description": "Reason for visit",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "ADVPGHCode",
-                        "in": "body",
-                        "description": "Incident code (what law did they break?)",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "CitationNumber",
-                        "in": "body",
-                        "description": "Citation number, if issued",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Comments",
-                        "in": "body",
-                        "description": "Free text",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "AddressID",
-                        "in": "body",
-                        "description": "GPS coords, formatted as object",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "AdvisoryID",
-                        "in": "body",
-                        "description": "Unique identifier for incident",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "SubmittedBy",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "CallOrigin",
-                        "in": "body",
-                        "description": "Incident's point of origin",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Address",
-                        "in": "body",
-                        "description": "Address as formatted string",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "ModifiedBy",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Officers",
-                        "in": "body",
-                        "description": "String array of officer initials involved in incident",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Open",
-                        "in": "body",
-                        "description": "Incident status, Yes or No",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Note",
-                        "in": "body",
-                        "description": "Smaller free text field",
-                        "type": "string",
-                        "required": false
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/updateIncident": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Updates an existing incident record",
-                "description": "Passed a new incident record in body, replaces existing record",
-                "parameters": [{
-                        "name": "itemId",
-                        "in": "body",
-                        "description": "SP item ID",
-                        "type": "number",
-                        "required": true
-                    }, {
-                        "name": "OwnersFirstName",
-                        "in": "body",
-                        "description": "Owner's first name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "OwnersLastName",
-                        "in": "body",
-                        "description": "Owner's last name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "OwnersTelephone",
-                        "in": "body",
-                        "description": "Owner's telephone number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "ReasonforVisit",
-                        "in": "body",
-                        "description": "Reason for visit",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "ADVPGHCode",
-                        "in": "body",
-                        "description": "Incident code (what law did they break?)",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "CitationNumber",
-                        "in": "body",
-                        "description": "Citation number, if issued",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Comments",
-                        "in": "body",
-                        "description": "Free text",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "AddressID",
-                        "in": "body",
-                        "description": "GPS coords, formatted as object",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "AdvisoryID",
-                        "in": "body",
-                        "description": "Unique identifier for incident",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "SubmittedBy",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "CallOrigin",
-                        "in": "body",
-                        "description": "Incident's point of origin",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Address",
-                        "in": "body",
-                        "description": "Address as formatted string",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "ModifiedBy",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Officers",
-                        "in": "body",
-                        "description": "String array of officer initials involved in incident",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Open",
-                        "in": "body",
-                        "description": "Incident status, Yes or No",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Note",
-                        "in": "body",
-                        "description": "Smaller free text field",
-                        "type": "string",
-                        "required": false
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/addAnimal": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Creates a new animal record",
-                "description": "Passed a new animal record in body",
-                "parameters": [{
-                        "name": "Type",
-                        "in": "body",
-                        "description": "Animal type",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Breed",
-                        "in": "body",
-                        "description": "Animal breed",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Coat",
-                        "in": "body",
-                        "description": "Animal coat",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Sex",
-                        "in": "body",
-                        "description": "Animal sex",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "LicenseNumber",
-                        "in": "body",
-                        "description": "License number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "RabbiesVacNo",
-                        "in": "body",
-                        "description": "Rabbies vacination number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "RabbiesVacExp",
-                        "in": "body",
-                        "description": "Rabbies vaccination expiration date",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Veterinarian",
-                        "in": "body",
-                        "description": "Veterinarian",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "LicenseYear",
-                        "in": "body",
-                        "description": "Year license was issued",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Age",
-                        "in": "body",
-                        "description": "Animal age",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "AdvisoryID",
-                        "in": "body",
-                        "description": "UUID of parent incident, primary key between two",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Name",
-                        "in": "body",
-                        "description": "Animal name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Comments",
-                        "in": "body",
-                        "description": "Free text",
-                        "type": "string",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/updateAnimal": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Update an existing animal record",
-                "description": "Passed a new animal record in body, replaces existing record",
-                "parameters": [{
-                        "name": "itemId",
-                        "in": "body",
-                        "description": "SP item ID",
-                        "type": "number",
-                        "required": true
-                    }, {
-                        "name": "Type",
-                        "in": "body",
-                        "description": "Animal type",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Breed",
-                        "in": "body",
-                        "description": "Animal breed",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Coat",
-                        "in": "body",
-                        "description": "Animal coat",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Sex",
-                        "in": "body",
-                        "description": "Animal sex",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "LicenseNumber",
-                        "in": "body",
-                        "description": "License number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "RabbiesVacNo",
-                        "in": "body",
-                        "description": "Rabbies vacination number",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "RabbiesVacExp",
-                        "in": "body",
-                        "description": "Rabbies vaccination expiration date",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Veterinarian",
-                        "in": "body",
-                        "description": "Veterinarian",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "LicenseYear",
-                        "in": "body",
-                        "description": "Year license was issued",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Age",
-                        "in": "body",
-                        "description": "Animal age",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "AdvisoryID",
-                        "in": "body",
-                        "description": "UUID of parent incident, primary key between two",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Name",
-                        "in": "body",
-                        "description": "Animal name",
-                        "type": "string",
-                        "required": false
-                    },
-                    {
-                        "name": "Comments",
-                        "in": "body",
-                        "description": "Free text",
-                        "type": "string",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/deleteAnimal": {
-            "post": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Deletes existing animal record",
-                "description": "Passed SP item ID in query",
-                "parameters": [{
-                    "name": "itemId",
-                    "in": "query",
-                    "description": "SP item ID",
-                    "type": "number",
-                    "required": true
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Success!"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/accmobile/dropdowns": {
-            "get": {
-                "tags": [
-                    "ACC Mobile"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Dropdown data",
-                "description": "Returns an array of all data for controlled fields",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of data for controlled fields",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "objects": {
-                                        "type": "object"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/ethicstraining/courseHistory": {
-            "get": {
-                "tags": [
-                    "Ethics Training"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "User's course history",
-                "description": "Passed a user's email, returns the user's course history",
-                "parameters": [{
-                    "name": "user",
-                    "in": "query",
-                    "description": "Email address of user",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "An array of courses started and/or completed",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "courseID": {
-                                        "type": "number"
-                                    },
-                                    "started": {
-                                        "type": "string"
-                                    },
-                                    "user": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "organization": {
-                                        "type": "string"
-                                    },
-                                    "completed": {
-                                        "type": "boolean"
-                                    },
-                                    "progress": {
-                                        "type": "number"
-                                    },
-                                    "highPoint": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/ethicstraining/newCourse": {
-            "post": {
-                "tags": [
-                    "Ethics Training"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Creates a new course record",
-                "description": "Passed a new course record in body, formatted for SP",
-                "parameters": [{
-                        "name": "User",
-                        "in": "body",
-                        "description": "User's name",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Email",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Organization",
-                        "in": "body",
-                        "description": "User's organization",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Progress",
-                        "in": "body",
-                        "description": "Course progress, defaults to 0",
-                        "type": "number",
-                        "required": true
-                    },
-                    {
-                        "name": "HighPoint",
-                        "in": "body",
-                        "description": "Course high point, defaults to 0",
-                        "type": "number",
-                        "required": true
-                    },
-                    {
-                        "name": "Completed",
-                        "in": "body",
-                        "description": "Course completion status, defaults to false",
-                        "type": "boolean",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns the ID of generated object",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "number"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/ethicstraining/updateCourse": {
-            "post": {
-                "tags": [
-                    "Ethics Training"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Updates an existing course record",
-                "description": "Passed a new course record in body, formatted for SP",
-                "parameters": [{
-                        "name": "User",
-                        "in": "body",
-                        "description": "User's name",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Email",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Organization",
-                        "in": "body",
-                        "description": "User's organization",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Progress",
-                        "in": "body",
-                        "description": "Course progress, defaults to 0",
-                        "type": "number",
-                        "required": true
-                    },
-                    {
-                        "name": "HighPoint",
-                        "in": "body",
-                        "description": "Course high point, defaults to 0",
-                        "type": "number",
-                        "required": true
-                    },
-                    {
-                        "name": "Completed",
-                        "in": "body",
-                        "description": "Course completion status, defaults to false",
-                        "type": "boolean",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/iphelp/allLiaisons": {
-            "get": {
-                "tags": [
-                    "I&P Help"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "I&P liaisons",
-                "description": "Returns array of liaisons",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of email addresses",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "user": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/iphelp/allEquipment": {
-            "get": {
-                "tags": [
-                    "I&P Help"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "All equipment for rent",
-                "description": "Returns array of equipment",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of equipment records",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "itemID": {
-                                        "type": "number"
-                                    },
-                                    "item": {
-                                        "type": "string"
-                                    },
-                                    "itemType": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    },
-                                    "pcNumber": {
-                                        "type": "string"
-                                    },
-                                    "assetNumber": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/iphelp/allEquipmentLoans": {
-            "get": {
-                "tags": [
-                    "I&P Help"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Equipment loan history",
-                "description": "Returns array of equipment loan history",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "An array of equipment loan records",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "itemID": {
-                                        "type": "string"
-                                    },
-                                    "from": {
-                                        "type": "string"
-                                    },
-                                    "to": {
-                                        "type": "string"
-                                    },
-                                    "pickedUp": {
-                                        "type": "string"
-                                    },
-                                    "returned": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    }
-                }
-            }
-        },
-        "/iphelp/newEquipmentLoan": {
-            "post": {
-                "tags": [
-                    "I&P Help"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "New equipment loan record",
-                "description": "Passed a new reservation record in body, formatted for SP",
-                "parameters": [{
-                        "name": "ReservationID",
-                        "in": "body",
-                        "description": "UUID generated on client",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "User",
-                        "in": "body",
-                        "description": "User's email address",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Department",
-                        "in": "body",
-                        "description": "User's department",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Phone",
-                        "in": "body",
-                        "description": "User's phone number",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Item",
-                        "in": "body",
-                        "description": "Name of item being loaned out",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "ItemID",
-                        "in": "body",
-                        "description": "ID of item being loaned out, as generated from SP table",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "AssetNumber",
-                        "in": "body",
-                        "description": "Asset number of item being loaned out",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "PickedUp",
-                        "in": "body",
-                        "description": "True or false",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "Returned",
-                        "in": "body",
-                        "description": "True or false",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "From",
-                        "in": "body",
-                        "description": "DateTime reservation begins",
-                        "type": "string",
-                        "required": true
-                    },
-                    {
-                        "name": "To",
-                        "in": "body",
-                        "description": "DateTime reservation ends",
-                        "type": "string",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/pghsupply/isAdmin": {
-            "get": {
-                "tags": [
-                    "PGH Supply"
-                ],
-                "security": [{
-                    "Bearer": []
-                }],
-                "summary": "Is user a supply admin?",
-                "description": "Returns true/false after checking supplied user against admin group",
-                "parameters": [{
-                    "name": "user",
-                    "in": "query",
-                    "description": "Email address of user",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "Is admin?  True or false",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "isAdmin": {
-                                    "type": "boolean"
-                                }
-                            }
-
-                        }
-                    },
-                    "403": {
-                        "description": "Access Denied"
-                    },
-                    "500": {
-                        "description": "Server Error",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "Error": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "365 Proxy",
+    "description": "Handles all traffic between MS 365 and client applications",
+    "version": "1.0.0"
+  },
+  "host": "365proxy.azurewebsites.us",
+  "schemes": ["https"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
+  },
+  "paths": {
+    "/accmobile/allUsers": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All Users",
+        "description": "Returns an array of all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of user email addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/allIncidents": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All Incidents",
+        "description": "Returns an array of all incidents",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of incident accounts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "itemId": {
+                    "type": "number"
+                  },
+                  "coords": {
+                    "type": "string"
+                  },
+                  "reasonForVisit": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "ownersLastName": {
+                    "type": "string"
+                  },
+                  "ownersFirstName": {
+                    "type": "string"
+                  },
+                  "ownersTelephoneNumber": {
+                    "type": "string"
+                  },
+                  "pghCode": {
+                    "type": "string"
+                  },
+                  "citationNumber": {
+                    "type": "string"
+                  },
+                  "comments": {
+                    "type": "string"
+                  },
+                  "callOrigin": {
+                    "type": "string"
+                  },
+                  "submittedBy": {
+                    "type": "string"
+                  },
+                  "modifiedBy": {
+                    "type": "string"
+                  },
+                  "officerInitials": {
+                    "type": "string"
+                  },
+                  "open": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/selectIncident": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Single incident",
+        "description": "Returns an array with a single incident object",
+        "parameters": [
+          {
+            "name": "AdvisoryID",
+            "in": "query",
+            "description": "UUID of incident",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of with a single incident object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "itemId": {
+                    "type": "number"
+                  },
+                  "coords": {
+                    "type": "string"
+                  },
+                  "reasonForVisit": {
+                    "type": "string"
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "ownersLastName": {
+                    "type": "string"
+                  },
+                  "ownersFirstName": {
+                    "type": "string"
+                  },
+                  "ownersTelephoneNumber": {
+                    "type": "string"
+                  },
+                  "pghCode": {
+                    "type": "string"
+                  },
+                  "citationNumber": {
+                    "type": "string"
+                  },
+                  "comments": {
+                    "type": "string"
+                  },
+                  "callOrigin": {
+                    "type": "string"
+                  },
+                  "submittedBy": {
+                    "type": "string"
+                  },
+                  "modifiedBy": {
+                    "type": "string"
+                  },
+                  "officerInitials": {
+                    "type": "string"
+                  },
+                  "open": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/attachments": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Attachment meta",
+        "description": "Returns an array of metadata with which to grab images from blob",
+        "parameters": [
+          {
+            "name": "incidentID",
+            "in": "query",
+            "description": "UUID of incident",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of image metadata",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "incidentID": {
+                    "type": "string"
+                  },
+                  "relativePath": {
+                    "type": "string"
+                  },
+                  "imageTitle": {
+                    "type": "string"
+                  },
+                  "imageDescription": {
+                    "type": "string"
+                  },
+                  "itemId": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/attachmentMeta": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Creates a new meta record for image",
+        "description": "Passed an object of metadata for image created in blob",
+        "parameters": [
+          {
+            "name": "incidentID",
+            "in": "body",
+            "description": "UUID for incieent",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "relativePath",
+            "in": "body",
+            "description": "Path of image within blob",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "attachmentTitle",
+            "in": "body",
+            "description": "Title of image",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "attachmentDescription",
+            "in": "body",
+            "description": "Description of image",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/deleteAttachment": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Deletes image meta",
+        "description": "Deletes metadata on image in blob",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "SP item ID",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/selectAnimals": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Animals per incident",
+        "description": "Returns an array with all animals associated with incident",
+        "parameters": [
+          {
+            "name": "AdvisoryID",
+            "in": "query",
+            "description": "UUID of incident",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of animals records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "itemID": {
+                    "type": "number"
+                  },
+                  "incidentID": {
+                    "type": "string"
+                  },
+                  "animalName": {
+                    "type": "string"
+                  },
+                  "animalType": {
+                    "type": "string"
+                  },
+                  "animalBreed": {
+                    "type": "string"
+                  },
+                  "animalCoat": {
+                    "type": "string"
+                  },
+                  "animalSex": {
+                    "type": "string"
+                  },
+                  "animalAge": {
+                    "type": "string"
+                  },
+                  "LicenseNo": {
+                    "type": "string"
+                  },
+                  "LicenseYear": {
+                    "type": "string"
+                  },
+                  "RabbiesVacNo": {
+                    "type": "string"
+                  },
+                  "RabbiesVacExp": {
+                    "type": "string"
+                  },
+                  "Vet": {
+                    "type": "string"
+                  },
+                  "Comments": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/addIncident": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Creates a new incident record",
+        "description": "Passed a new incident record in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "OwnersFirstName",
+            "in": "body",
+            "description": "Owner's first name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "OwnersLastName",
+            "in": "body",
+            "description": "Owner's last name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "OwnersTelephone",
+            "in": "body",
+            "description": "Owner's telephone number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ReasonforVisit",
+            "in": "body",
+            "description": "Reason for visit",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ADVPGHCode",
+            "in": "body",
+            "description": "Incident code (what law did they break?)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "CitationNumber",
+            "in": "body",
+            "description": "Citation number, if issued",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Comments",
+            "in": "body",
+            "description": "Free text",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "AddressID",
+            "in": "body",
+            "description": "GPS coords, formatted as object",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "AdvisoryID",
+            "in": "body",
+            "description": "Unique identifier for incident",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "SubmittedBy",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "CallOrigin",
+            "in": "body",
+            "description": "Incident's point of origin",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Address",
+            "in": "body",
+            "description": "Address as formatted string",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ModifiedBy",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Officers",
+            "in": "body",
+            "description": "String array of officer initials involved in incident",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Open",
+            "in": "body",
+            "description": "Incident status, Yes or No",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Note",
+            "in": "body",
+            "description": "Smaller free text field",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/updateIncident": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Updates an existing incident record",
+        "description": "Passed a new incident record in body, replaces existing record",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "body",
+            "description": "SP item ID",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "OwnersFirstName",
+            "in": "body",
+            "description": "Owner's first name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "OwnersLastName",
+            "in": "body",
+            "description": "Owner's last name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "OwnersTelephone",
+            "in": "body",
+            "description": "Owner's telephone number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ReasonforVisit",
+            "in": "body",
+            "description": "Reason for visit",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ADVPGHCode",
+            "in": "body",
+            "description": "Incident code (what law did they break?)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "CitationNumber",
+            "in": "body",
+            "description": "Citation number, if issued",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Comments",
+            "in": "body",
+            "description": "Free text",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "AddressID",
+            "in": "body",
+            "description": "GPS coords, formatted as object",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "AdvisoryID",
+            "in": "body",
+            "description": "Unique identifier for incident",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "SubmittedBy",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "CallOrigin",
+            "in": "body",
+            "description": "Incident's point of origin",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Address",
+            "in": "body",
+            "description": "Address as formatted string",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ModifiedBy",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Officers",
+            "in": "body",
+            "description": "String array of officer initials involved in incident",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Open",
+            "in": "body",
+            "description": "Incident status, Yes or No",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Note",
+            "in": "body",
+            "description": "Smaller free text field",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/addAnimal": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Creates a new animal record",
+        "description": "Passed a new animal record in body",
+        "parameters": [
+          {
+            "name": "Type",
+            "in": "body",
+            "description": "Animal type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Breed",
+            "in": "body",
+            "description": "Animal breed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Coat",
+            "in": "body",
+            "description": "Animal coat",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Sex",
+            "in": "body",
+            "description": "Animal sex",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "LicenseNumber",
+            "in": "body",
+            "description": "License number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "RabbiesVacNo",
+            "in": "body",
+            "description": "Rabbies vacination number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "RabbiesVacExp",
+            "in": "body",
+            "description": "Rabbies vaccination expiration date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Veterinarian",
+            "in": "body",
+            "description": "Veterinarian",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "LicenseYear",
+            "in": "body",
+            "description": "Year license was issued",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Age",
+            "in": "body",
+            "description": "Animal age",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "AdvisoryID",
+            "in": "body",
+            "description": "UUID of parent incident, primary key between two",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Name",
+            "in": "body",
+            "description": "Animal name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Comments",
+            "in": "body",
+            "description": "Free text",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/updateAnimal": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Update an existing animal record",
+        "description": "Passed a new animal record in body, replaces existing record",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "body",
+            "description": "SP item ID",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "Type",
+            "in": "body",
+            "description": "Animal type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Breed",
+            "in": "body",
+            "description": "Animal breed",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Coat",
+            "in": "body",
+            "description": "Animal coat",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Sex",
+            "in": "body",
+            "description": "Animal sex",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "LicenseNumber",
+            "in": "body",
+            "description": "License number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "RabbiesVacNo",
+            "in": "body",
+            "description": "Rabbies vacination number",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "RabbiesVacExp",
+            "in": "body",
+            "description": "Rabbies vaccination expiration date",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Veterinarian",
+            "in": "body",
+            "description": "Veterinarian",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "LicenseYear",
+            "in": "body",
+            "description": "Year license was issued",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Age",
+            "in": "body",
+            "description": "Animal age",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "AdvisoryID",
+            "in": "body",
+            "description": "UUID of parent incident, primary key between two",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Name",
+            "in": "body",
+            "description": "Animal name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Comments",
+            "in": "body",
+            "description": "Free text",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/deleteAnimal": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Deletes existing animal record",
+        "description": "Passed SP item ID in query",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "SP item ID",
+            "type": "number",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/dropdowns": {
+      "get": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Dropdown data",
+        "description": "Returns an array of all data for controlled fields",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of data for controlled fields",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "objects": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/calendar/newEvent": {
+      "post": {
+        "tags": ["Calendar Events"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "New event",
+        "description": "Creates an event on user's Outlook calendar",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Email address of user",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "subject",
+            "in": "body",
+            "description": "Course subject",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "start",
+            "in": "body",
+            "description": "Two fields, dateTime & timeZone",
+            "type": "object",
+            "required": true
+          },
+          {
+            "name": "location",
+            "in": "body",
+            "description": "One field: displayName",
+            "type": "object",
+            "required": true
+          },
+          {
+            "name": "attendees",
+            "in": "body",
+            "description": "Other attendees",
+            "type": "array",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of generated object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calendar/deleteEvent": {
+      "post": {
+        "tags": ["Calendar Events"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Delete event",
+        "description": "Deletes an event from user's Outlook calendar",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Email address of user",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "eventId",
+            "in": "query",
+            "description": "ID of event",
+            "type": "number",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ethicstraining/courseHistory": {
+      "get": {
+        "tags": ["Ethics Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "User's course history",
+        "description": "Passed a user's email, returns the user's course history",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Email address of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of courses started and/or completed",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "courseID": {
+                    "type": "number"
+                  },
+                  "started": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "organization": {
+                    "type": "string"
+                  },
+                  "completed": {
+                    "type": "boolean"
+                  },
+                  "progress": {
+                    "type": "number"
+                  },
+                  "highPoint": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/ethicstraining/newCourse": {
+      "post": {
+        "tags": ["Ethics Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Creates a new course record",
+        "description": "Passed a new course record in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User's name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Email",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Organization",
+            "in": "body",
+            "description": "User's organization",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Progress",
+            "in": "body",
+            "description": "Course progress, defaults to 0",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "HighPoint",
+            "in": "body",
+            "description": "Course high point, defaults to 0",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "Completed",
+            "in": "body",
+            "description": "Course completion status, defaults to false",
+            "type": "boolean",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ID of generated object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/ethicstraining/updateCourse": {
+      "post": {
+        "tags": ["Ethics Training"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Updates an existing course record",
+        "description": "Passed a new course record in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User's name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Email",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Organization",
+            "in": "body",
+            "description": "User's organization",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Progress",
+            "in": "body",
+            "description": "Course progress, defaults to 0",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "HighPoint",
+            "in": "body",
+            "description": "Course high point, defaults to 0",
+            "type": "number",
+            "required": true
+          },
+          {
+            "name": "Completed",
+            "in": "body",
+            "description": "Course completion status, defaults to false",
+            "type": "boolean",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iphelp/allLiaisons": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "I&P liaisons",
+        "description": "Returns array of liaisons",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of email addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/iphelp/allEquipment": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "All equipment for rent",
+        "description": "Returns array of equipment",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of equipment records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "itemID": {
+                    "type": "number"
+                  },
+                  "item": {
+                    "type": "string"
+                  },
+                  "itemType": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "pcNumber": {
+                    "type": "string"
+                  },
+                  "assetNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/iphelp/allEquipmentLoans": {
+      "get": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Equipment loan history",
+        "description": "Returns array of equipment loan history",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An array of equipment loan records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "itemID": {
+                    "type": "string"
+                  },
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "pickedUp": {
+                    "type": "string"
+                  },
+                  "returned": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          }
+        }
+      }
+    },
+    "/iphelp/newEquipmentLoan": {
+      "post": {
+        "tags": ["I&P Help"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "New equipment loan record",
+        "description": "Passed a new reservation record in body, formatted for SP",
+        "parameters": [
+          {
+            "name": "ReservationID",
+            "in": "body",
+            "description": "UUID generated on client",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User's email address",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Department",
+            "in": "body",
+            "description": "User's department",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Phone",
+            "in": "body",
+            "description": "User's phone number",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Item",
+            "in": "body",
+            "description": "Name of item being loaned out",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ItemID",
+            "in": "body",
+            "description": "ID of item being loaned out, as generated from SP table",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "AssetNumber",
+            "in": "body",
+            "description": "Asset number of item being loaned out",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "PickedUp",
+            "in": "body",
+            "description": "True or false",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Returned",
+            "in": "body",
+            "description": "True or false",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "From",
+            "in": "body",
+            "description": "DateTime reservation begins",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "To",
+            "in": "body",
+            "description": "DateTime reservation ends",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pghsupply/isAdmin": {
+      "get": {
+        "tags": ["PGH Supply"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Is user a supply admin?",
+        "description": "Returns true/false after checking supplied user against admin group",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Email address of user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Is admin?  True or false",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isAdmin": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
