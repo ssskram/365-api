@@ -101,3 +101,14 @@ Fire off the POST request, and inspect the response body for the access token:
 ```
 
 The access token expires quickly.
+
+## Step 6: Update environment variables on server, and in dev
+For both the production service and the staging service, update all application settings with the new values for the following environment variables:
+
+```
+SP_ID=<New client ID>
+SP_SECRET=<New client secret>
+SP_TOKEN=<New refresh token>
+```
+
+Update the values locally as well.
